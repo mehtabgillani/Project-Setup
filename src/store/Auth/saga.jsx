@@ -2,7 +2,8 @@ import { takeEvery, fork, put, all, call, takeLatest } from 'redux-saga/effects'
 import { LOGIN } from './constant';
 import { loginSuccess } from './actions';
 import { push } from 'connected-react-router';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from "../../configcopy/axios"
 
 function* loginUser({ payload }) {
     localStorage.setItem('token', 'hjvabkjdansdhbajsnldkasbdjnaksdb')
@@ -11,14 +12,7 @@ function* loginUser({ payload }) {
             "email": payload.email,
             "password": payload.password
         }
-        console.log("hjvabkjdansdhbajsnldkasbdjnaksdb")
-        const response = yield axios.post(`http://ec2-18-118-15-229.us-east-2.compute.amazonaws.com/api/v1/users/login`, data, {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Content-Type": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-            }
-        });
+        const response = yield axios.post(`users/login`, data);
         yield put(loginSuccess(response.data));
         yield put(push('/online_marketing_dashboard'));
 
