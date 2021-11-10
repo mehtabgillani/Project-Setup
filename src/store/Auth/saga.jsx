@@ -3,7 +3,7 @@ import { LOGIN } from './constant';
 import { loginSuccess } from './actions';
 import { push } from 'connected-react-router';
 // import axios from 'axios';
-import axios from "../../configcopy/axios"
+import axios from "../../config/axios"
 
 function* loginUser({ payload }) {
     localStorage.setItem('token', 'hjvabkjdansdhbajsnldkasbdjnaksdb')
