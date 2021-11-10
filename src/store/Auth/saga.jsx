@@ -5,6 +5,7 @@ import { push } from 'connected-react-router';
 import axios from 'axios';
 
 function* loginUser({ payload }) {
+    localStorage.setItem('token', 'hjvabkjdansdhbajsnldkasbdjnaksdb')
     try {
         let data = {
             "email": payload.email,
