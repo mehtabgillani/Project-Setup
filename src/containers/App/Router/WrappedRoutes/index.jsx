@@ -19,7 +19,7 @@ import DefaultPages from './ThemeRoutes/DefaultPages';
 import Documentation from './ThemeRoutes/Documentation';
 import Commerce from './ThemeRoutes/Commerce';
 import Finance from './ThemeRoutes/Finance';
-import Test from "./Test"
+import User from "./AppRoutes/User"
 
 export default () => (
   <div>
@@ -43,7 +43,8 @@ export default () => (
       <Route path="/e-commerce" component={ECommerce} />
       <Route path="/default_pages" component={DefaultPages} />
       <Route path="/documentation" component={Documentation} />
-      <Route path="/user" component={Test} />
+      //Admin Panel Routes
+      <Route path="/user" component={User} />
     </div>
   </div>
 );
