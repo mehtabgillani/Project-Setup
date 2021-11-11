@@ -1,24 +1,24 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Layout from '../../../Layout/index';
-import Commerce from './Commerce';
-import Finance from './Finance';
 import OnLineMarketingDashboard from '../../../Dashboards/OnLineMarketing/index';
 import AppDashboard from '../../../Dashboards/App/index';
 import BookingDashboard from '../../../Dashboards/Booking/index';
 import FitnessDashboard from '../../../Dashboards/Fitness/index';
-import UI from './UI';
 import Mail from '../../../Mail/index';
 import Chat from '../../../Chat/index';
 import Todo from '../../../Todo/index';
-import Forms from './Forms';
-import Tables from './Tables';
-import Charts from './Charts';
-import Maps from './Maps';
-import Account from './Account';
-import ECommerce from './ECommerce';
-import DefaultPages from './DefaultPages';
-import Documentation from './Documentation';
+import UI from './ThemeRoutes/UI';
+import Forms from './ThemeRoutes/Forms';
+import Tables from './ThemeRoutes/Tables';
+import Charts from './ThemeRoutes/Charts';
+import Maps from './ThemeRoutes/Maps';
+import Account from './ThemeRoutes/Account';
+import ECommerce from './ThemeRoutes/ECommerce';
+import DefaultPages from './ThemeRoutes/DefaultPages';
+import Documentation from './ThemeRoutes/Documentation';
+import Commerce from './ThemeRoutes/Commerce';
+import Finance from './ThemeRoutes/Finance';
 import Test from "./Test"
 
 export default () => (
