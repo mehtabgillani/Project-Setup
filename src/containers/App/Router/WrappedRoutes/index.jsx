@@ -43,7 +43,7 @@ export default () => (
       <Route path="/e-commerce" component={ECommerce} />
       <Route path="/default_pages" component={DefaultPages} />
       <Route path="/documentation" component={Documentation} />
-      //Admin Panel Routes
+      {/* //Admin Panel Routes */}
       <Route path="/user" component={User} />
     </div>
   </div>

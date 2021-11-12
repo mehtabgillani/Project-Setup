@@ -16,6 +16,12 @@ const SidebarContent = ({
   return (
     <div className="sidebar__content">
       <ul className="sidebar__block">
+      <SidebarLink
+          title="Users"
+          icon="home"
+          route="/user/user"
+          onClick={hideSidebar}
+        />
         <SidebarLink
           title="Online Marketing Dashboard"
           icon="home"

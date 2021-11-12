@@ -123,7 +123,7 @@ const Layout = ({
         changeBorderRadius={borderRadius}
         toggleBoxShadow={boxShadow}
       />
-      <BuyNowButton />
+      {/* <BuyNowButton /> */}
       {customizer.topNavigation
         ? (
           <TopbarWithNavigation
