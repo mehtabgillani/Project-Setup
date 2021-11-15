@@ -11,10 +11,12 @@ import {
   sidebarReducer,
   authReducer,
   auth,
+  Users
 } from "../../redux/reducers/index";
 import appConfigReducer from "../../redux/reducers/appConfigReducer";
 import covidReducer from "../Maps/VectorMapWithRequestData/redux/covidReducer";
 import todoReducer from "../Todo/redux/reducer";
+
 const history = createBrowserHistory();
 const rootReducer = combineReducers({
   router: connectRouter(history),
@@ -30,5 +32,6 @@ const rootReducer = combineReducers({
   covid: covidReducer,
   todo: todoReducer,
   auth: auth,
+  Users:Users,
 });
 export default rootReducer;

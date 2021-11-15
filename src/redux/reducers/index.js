@@ -8,6 +8,7 @@ import todoReducer from './todoReducer';
 import authReducer from './authReducer';
 // import auth from './testReducer/reducer';
 import auth from '../../store/Auth/reducer'
+import Users from "../../store/User/reducer"
 
 export {
   themeReducer,
@@ -18,5 +19,6 @@ export {
   customizerReducer,
   todoReducer,
   authReducer,
-  auth
+  auth,
+  Users
 };
