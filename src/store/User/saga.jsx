@@ -6,9 +6,7 @@ import { getUsersListSuccess } from "./actions";
 
 function* fetchUsers({ payload }) {
   try {
-    console.log("payload", payload);
-    const response = yield axios.get(`/admin/users?page=1`);
-    console.log("response.data",response.data)
+    const response = yield axios.get(`/admin/users?page=${payload.page}`);
     yield put(getUsersListSuccess(response.data));
   } catch (error) {}
 }

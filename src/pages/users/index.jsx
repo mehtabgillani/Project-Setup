@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, CardBody, Table } from "reactstrap";
+import { Container, Row, Col, Card, CardBody, Table, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Pagination from "react-js-pagination";
-import { getUsersList,changeUserActivePage } from "../../store/User/actions";
+import { getUsersList, changeUserActivePage } from "../../store/User/actions";
 
 function UserList() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.Users.usersList);
+  const activePage = useSelector((state) => state.Users.userActivePage);
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(getUsersList("hey"));
-  }, []);
+    dispatch(
+      getUsersList({
+        page: activePage,
+      })
+    );
+  }, [activePage]);
 
   return (
     <React.Fragment>
@@ -72,6 +77,9 @@ function UserList() {
                             <td>{user.age}</td>
                             <td>{user.phoneNumber}</td>
                             <td>{user.birthDate}</td>
+                            <td>
+                              <Button>delete</Button>{" "}
+                            </td>
                           </tr>
                         ))}
                     </tbody>
@@ -81,15 +89,14 @@ function UserList() {
                     <Pagination
                       itemClass="page-item"
                       linkClass="page-link"
-                      activePage={users.userActivePage}
+                      activePage={activePage}
                       itemsCountPerPage={5}
                       totalItemsCount={
                         users.totalPages ? users.totalPages * 5 : 5
                       }
                       pageRangeDisplayed={5}
                       onChange={(pageNumber) => {
-                        document.querySelector(".content-page").scrollTo(0, 0);
-                        // dispatch(changeUserActivePage(pageNumber));
+                        dispatch(changeUserActivePage(pageNumber));
                       }}
                     />
                   </div>
