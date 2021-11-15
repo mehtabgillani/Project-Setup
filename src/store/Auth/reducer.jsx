@@ -9,9 +9,9 @@ const initialState = {
 const Auth = produce((state, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      console.log("in login success action response", action.payload.data);
-      state.user = action.payload.data.user.name;
-      state.token = action.payload.data.access_token;
+      console.log("in login success action response", action.payload);
+      // state.user = action.payload.data.user.name;
+      state.token = action.payload.token;
       break;
 
     default:
