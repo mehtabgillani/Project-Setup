@@ -9,7 +9,7 @@ import { LoadScript } from "@react-google-maps/api";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "bootstrap/dist/css/bootstrap.css";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme , ThemeProvider } from "@material-ui/core/styles";
 import "../../scss/app.scss";
 import PropTypes from "prop-types";
 import Router from "./Router";
@@ -24,7 +24,7 @@ import auth0Config from "../../config/auth0";
 i18n.init(i18nextConfig);
 
 const ThemeComponent = ({ children, themeName }) => {
-  const theme = createMuiTheme({
+  const theme = createTheme ({
     palette: {
       type: themeName === "theme-dark" ? "dark" : "light",
     },
