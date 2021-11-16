@@ -17,6 +17,7 @@ import {
 } from "../../store/User/actions";
 import Delete from "../../assets/icons/delete.svg";
 import DeleteModal from "./components/modal";
+import moment from "moment";
 function UserList() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.Users);
@@ -31,7 +32,6 @@ function UserList() {
   };
   useEffect(() => {
     dispatch(getUsersList({ page: users.userActivePage }));
-    console.log("i am the first use effect with dependency");
   }, [users.userActivePage]);
 
   return (
@@ -107,7 +107,11 @@ function UserList() {
 
                             <td>{user.age}</td>
                             <td>{user.phoneNumber}</td>
-                            <td>{user.birthDate}</td>
+                            <td>
+                              {moment(user.birthDate).format(
+                                "DD/MM/YYYY"
+                              )}
+                            </td>
                             <td>
                               <span
                                 id={`delete_${id}`}
