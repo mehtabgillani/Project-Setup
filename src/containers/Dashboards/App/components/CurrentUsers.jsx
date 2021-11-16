@@ -11,11 +11,11 @@ const CurrentUsers = () => {
 
   return (
     <Panel
-      lg={6}
+      lg={3}
       xl={3}
       md={12}
-      title={t('app_dashboard.current_users')}
-      subhead="Last 10 minutes"
+      title={t('app_dashboard.total_users')}
+      // subhead="Last 10 minutes"
     >
       <div className="dashboard__current-users">
         <div className="dashboard__current-users-chart">
@@ -36,12 +36,12 @@ const CurrentUsers = () => {
         </div>
         <div className="dashboard__current-users-info" dir="ltr">
           <p className="dashboard__current-users-day">
-            <span>7d min</span>
-            <span>0</span>
+            {/* <span>7d min</span>
+            <span>0</span> */}
           </p>
           <p className="dashboard__current-users-day">
-            <span>7d max</span>
-            <span>500</span>
+            {/* <span>7d max</span>
+            <span>500</span> */}
           </p>
         </div>
       </div>

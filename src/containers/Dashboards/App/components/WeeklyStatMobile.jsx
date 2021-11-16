@@ -15,11 +15,11 @@ const WeeklyStatMobile = () => {
   return (
     <Panel
       md={12}
-      lg={6}
+      lg={3}
       xl={3}
       xs={12}
-      title={t('app_dashboard.weekly_stat_mobile')}
-      subhead="Top selling items statistic by last month"
+      title={t('app_dashboard.users_by_device')}
+      subhead="Users by device last month"
     >
       <div className="dashboard__weekly-stat">
         <div className="dashboard__weekly-stat-chart">
@@ -42,7 +42,7 @@ const WeeklyStatMobile = () => {
               <p className="dashboard__weekly-stat-label" style={{ color: '#b8e986' }}>78%</p>
             </div>
             <div className="dashboard__weekly-stat-info">
-              <p>Customers satisfaction rate</p>
+              <p>Android Users</p>
             </div>
           </div>
           <div className="dashboard__weekly-stat-chart-item">
@@ -64,7 +64,7 @@ const WeeklyStatMobile = () => {
               <p className="dashboard__weekly-stat-label" style={{ color: '#ff4861' }}>25%</p>
             </div>
             <div className="dashboard__weekly-stat-info">
-              <p>Negative <br />feedback</p>
+              <p>Iphone Users</p>
             </div>
           </div>
         </div>

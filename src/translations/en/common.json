@@ -33,13 +33,17 @@
   "app_dashboard": {
     "page_title": "App Dashboard",
     "current_users": "Current Users",
+		"total_users": "Total Users",
     "active_users": "Active Users",
-    "widget_sessions": "Sessions",
+    "widget_subscriptions": "Subscriptions",
+    "widget_active_revenue": "Revenue",
     "widget_active_users": "Active Users",
     "widget_new_users": "New Users",
-    "widget_pageviews": "Pageviews",
+    "connections_made": "Connections Made",
     "app_tile_clicks": "App Tile Clicks",
+    "users_by_device": "Users By Device",
     "weekly_stat_mobile": "Weekly Stat",
+    
     "social_marketing_mobile": "Social Marketing"
   },
   "booking_dashboard": {

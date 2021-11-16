@@ -34,13 +34,13 @@ const ActiveUsers = ({ dir, themeName }) => {
   return (
     <Panel
       lg={6}
-      xl={9}
+      xl={6}
       md={12}
       title={t('app_dashboard.active_users')}
       subhead="See how users involve into app"
     >
       <div dir="ltr">
-        <ResponsiveContainer height={195} className="dashboard__active-users-chart">
+        <ResponsiveContainer height={315} className="dashboard__active-users-chart">
           <LineChart
             height={195}
             data={data}

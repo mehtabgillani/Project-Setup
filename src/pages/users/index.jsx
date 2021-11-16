@@ -73,7 +73,10 @@ function UserList() {
                 <>
                   <Table
                     responsive
-                    hover
+                    striped 
+                    bordered 
+                    hover 
+                    size="md"
                     className="fixed"
                     style={{
                       overflow: "hidden",
@@ -81,7 +84,7 @@ function UserList() {
                       textAlign: "center",
                     }}
                   >
-                    <thead className="thead-light">
+                    <thead className="">
                       <tr>
                         <th>User Name</th>
                         <th>Email</th>
@@ -139,7 +142,7 @@ function UserList() {
                         ))}
                     </tbody>
                   </Table>
-                  <Row className="justify-content-center mt-2">
+                  <Row className="justify-content-center mt-3">
                     <Col lg="3">
                       <div className="table_pagination">
                         <Pagination
