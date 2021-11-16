@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, CardBody, Table, Button } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  Table,
+  Tooltip,
+} from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "react-js-pagination";
 import {
@@ -12,14 +20,20 @@ import DeleteModal from "./components/modal";
 function UserList() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.Users);
+  const [tooltipOpenObj, setTooltipOpenObj] = useState({});
   const [deleteModal, setDeleteModal] = useState(false);
   const [userId, setUserId] = useState("");
-
+  const toggleForToolObj1 = (id) => {
+    setTooltipOpenObj({
+      ...tooltipOpenObj,
+      [id]: tooltipOpenObj[id] ? !tooltipOpenObj[id] : true,
+    });
+  };
   useEffect(() => {
-    dispatch(getUsersList({page: users.userActivePage}));
-    console.log("i am the first use effect with dependency")
+    dispatch(getUsersList({ page: users.userActivePage }));
+    console.log("i am the first use effect with dependency");
   }, [users.userActivePage]);
- 
+
   return (
     <React.Fragment>
       <Container fluid>
@@ -41,14 +55,14 @@ function UserList() {
           </Row>
         </div>
         <DeleteModal
-        page={users.userActivePage}
+          page={users.userActivePage}
           actionFunction={deleteUser}
           id={userId}
           modal={deleteModal}
           setModal={setDeleteModal}
           color="danger"
           title="Delete User!"
-          header
+          default
           message="Are you sure you want to delete this user? "
         />
 
@@ -82,16 +96,21 @@ function UserList() {
                       {users.usersList.data &&
                         users.usersList.data.users &&
                         users.usersList.data.users &&
-                        users.usersList.data.users.map((user) => (
+                        users.usersList.data.users.map((user, id) => (
                           <tr>
                             <td>{user.username}</td>
-                            <td>{user.email}</td>
+                            {user.email && user.email.length > 23 ? (
+                              <td>{user.email.substring(0, 23)}....</td>
+                            ) : (
+                              <td>{user.email}</td>
+                            )}
+
                             <td>{user.age}</td>
                             <td>{user.phoneNumber}</td>
                             <td>{user.birthDate}</td>
                             <td>
                               <span
-                                id={`delete_${user.username}`}
+                                id={`delete_${id}`}
                                 style={{ marginRight: "5px" }}
                                 onClick={() => {
                                   setDeleteModal(true);
@@ -100,30 +119,43 @@ function UserList() {
                               >
                                 <img style={{ height: "22px" }} src={Delete} />
                               </span>
+
+                              <Tooltip
+                                placement="top"
+                                isOpen={
+                                  tooltipOpenObj[`delete_${id}`] ? true : false
+                                }
+                                target={`delete_${id}`}
+                                toggle={() => toggleForToolObj1(`delete_${id}`)}
+                              >
+                                Delete User
+                              </Tooltip>
                             </td>
                           </tr>
                         ))}
                     </tbody>
                   </Table>
-                    <Row className="justify-content-center mt-2" >
-                      <Col lg="3">
-                        <div className="table_pagination">
+                  <Row className="justify-content-center mt-2">
+                    <Col lg="3">
+                      <div className="table_pagination">
                         <Pagination
-                      itemClass="page-item"
-                      linkClass="page-link"
-                      activePage={users.userActivePage}
-                      itemsCountPerPage={8}
-                      totalItemsCount={
-                        users.usersList.totalPages ? users.usersList.totalPages * 8 : 8
-                      }
-                      pageRangeDisplayed={5}
-                      onChange={(pageNumber) => {
-                        dispatch(changeUserActivePage(pageNumber));
-                      }}
-                    />
-                        </div>
-                      </Col>
-                    </Row>
+                          itemClass="page-item"
+                          linkClass="page-link"
+                          activePage={users.userActivePage}
+                          itemsCountPerPage={8}
+                          totalItemsCount={
+                            users.usersList.totalPages
+                              ? users.usersList.totalPages * 8
+                              : 8
+                          }
+                          pageRangeDisplayed={5}
+                          onChange={(pageNumber) => {
+                            dispatch(changeUserActivePage(pageNumber));
+                          }}
+                        />
+                      </div>
+                    </Col>
+                  </Row>
                 </>
               </CardBody>
             </Card>

@@ -77,7 +77,7 @@ const TopbarProfile = ({ user, auth0 }) => {
           )
           }
           <TopbarMenuLink
-            title="Logasdasd Out"
+            title="Log Out"
             icon="exit" 
             path="/"
            
