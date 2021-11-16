@@ -18,7 +18,7 @@ const ChangeColorThemes = () => (
     colorBackgroundBody: #f2f4f7,
     colorText: #646777,
     colorTextAdditional: #646777,
-    logoImg: url(../img/logo/logo-light.png),
+    logoImg: url(../img/logo/logo_itl.svg),
     colorHover: #fafbfe,
     colorBorder: #eff1f5,
     colorIcon: #999999,

@@ -5,8 +5,7 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import EyeIcon from "mdi-react/EyeIcon";
 import KeyVariantIcon from "mdi-react/KeyVariantIcon";
-import AccountOutlineIcon from "mdi-react/AccountOutlineIcon";
-import { NavLink } from "react-router-dom";
+import AccountOutlineIcon from "mdi-react/AccountOutlineIcon"; 
 import {loginUser} from "../../../store/Auth/actions"
 
 function LogInForm() {
@@ -49,6 +48,7 @@ function LogInForm() {
     <React.Fragment>
       <Form className="form login-form" onSubmit={loginFormik.handleSubmit}>
         <div className="form__form-group">
+        <span class="form__form-group-label">Username</span>
           <div className="form__form-group-field">
             <div className="form__form-group-icon">
               <AccountOutlineIcon />
@@ -94,9 +94,9 @@ function LogInForm() {
             >
               <EyeIcon />
             </button>
-            <div className="account__forgot-password">
+            {/* <div className="account__forgot-password">
               <NavLink to="/reset_password">Forgot a password?</NavLink>
-            </div>
+            </div> */}
           </div>
           {loginFormik.touched.password && loginFormik.errors.password ? (
             <div className="text-start mb-1 text-danger">
@@ -110,14 +110,7 @@ function LogInForm() {
         <div className="account__btns">
           <Button className="account__btn" type="submit" color="primary">
             Sign In
-          </Button>
-
-          <NavLink
-          className="btn btn-outline-primary account__btn"
-          to="/register"
-        >
-          Create Account
-        </NavLink>
+          </Button> 
         </div>
       </Form>
     </React.Fragment>

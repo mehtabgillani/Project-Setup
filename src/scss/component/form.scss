@@ -53,7 +53,8 @@
 
     &:focus, &:active {
       outline: none;
-      border-color: $color-accent;
+      border-color: #ced4da; 
+      box-shadow: none;
     }
   }
 
@@ -295,6 +296,7 @@
   @include themify($themes) {
     background: themed('colorFieldsBorder');
     border: 1px solid themed('colorFieldsBorder');
+    display: inline-flex;
   }
 
   svg {

@@ -11,7 +11,7 @@ const ChatCard = () => (
           contacts={myContacts}
           currentUser={{
             avatar: `${process.env.PUBLIC_URL}/img/ava.png`,
-            name: 'Roman Johanson',
+            name: 'James Buchan',
             userName: 'dragonKing',
           }}
         />

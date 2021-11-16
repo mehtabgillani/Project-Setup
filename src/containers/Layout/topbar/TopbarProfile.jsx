@@ -34,7 +34,7 @@ const TopbarProfile = ({ user, auth0 }) => {
       {isCollapsed && <button className="topbar__back" type="button" onClick={toggleProfile} />}
       <Collapse isOpen={isCollapsed} className="topbar__menu-wrap">
         <div className="topbar__menu">
-          <TopbarMenuLink
+          {/* <TopbarMenuLink
             title="My Profile"
             icon="user"
             path="/account/profile"
@@ -58,33 +58,30 @@ const TopbarProfile = ({ user, auth0 }) => {
             path="/mail"
             onClick={toggleProfile}
           />
-          <div className="topbar__menu-divider" />
-          <TopbarMenuLink
+          <div className="topbar__menu-divider" /> */}
+          {/* <TopbarMenuLink
             title="Account Settings"
             icon="cog"
             path="/account/profile"
             onClick={toggleProfile}
-          />
-          <TopbarMenuLink
-            title="Lock Screen"
-            icon="lock"
-            path="/lock_screen"
-            onClick={toggleProfile}
-          />
+          /> */}
           {auth0.isAuthenticated && (
             <TopbarMenuLink
-              title="Log Out Auth0"
-              icon="exit"
-              path="/log_in"
-              onClick={auth0.logout}
+              title="Log Out"
+              icon="exit" 
+              onClick={()=>{
+                localStorage.clear()
+              }}
             />
           )
           }
           <TopbarMenuLink
             title="Log Out"
-            icon="exit"
-            path="/log_in"
-            onClick={logout}
+            icon="exit" 
+            // onClick={logout}
+            onClick={()=>{
+              localStorage.clear()
+            }}
           />
         </div>
       </Collapse>

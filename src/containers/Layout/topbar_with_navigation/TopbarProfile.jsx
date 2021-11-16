@@ -16,7 +16,7 @@ const TopbarProfile = () => {
     <div className="topbar__profile">
       <button className="topbar__avatar" type="button" onClick={collapseProfile}>
         <img className="topbar__avatar-img" src={Ava} alt="avatar" />
-        <p className="topbar__avatar-name">Roman Johanson</p>
+        <p className="topbar__avatar-name">James Buchan</p>
         <DownIcon className="topbar__icon" />
       </button>
       {isCollapsed && <button className="topbar__back" type="button" onClick={collapseProfile} />}
