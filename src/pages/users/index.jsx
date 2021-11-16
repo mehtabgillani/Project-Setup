@@ -60,7 +60,10 @@ function UserList() {
                 <>
                   <Table
                     responsive
-                    hover
+                    striped 
+                    bordered 
+                    hover 
+                    size="md"
                     className="fixed"
                     style={{
                       overflow: "hidden",
@@ -68,7 +71,7 @@ function UserList() {
                       textAlign: "center",
                     }}
                   >
-                    <thead className="thead-light">
+                    <thead className="">
                       <tr>
                         <th>User Name</th>
                         <th>Email</th>
@@ -107,16 +110,16 @@ function UserList() {
                         ))}
                     </tbody>
                   </Table>
-                    <Row className="justify-content-center mt-2" >
+                    <Row className="justify-content-center mt-3" >
                       <Col lg="3">
                         <div className="table_pagination">
                           <Pagination
                             itemClass="page-item"
                             linkClass="page-link"
-                            activePage={activePage}
+                            activePage={users.userActivePage}
                             itemsCountPerPage={5}
                             totalItemsCount={
-                              users.totalPages ? users.totalPages * 5 : 5
+                              users.usersList.totalPages ? users.usersList.totalPages * 5 : 5
                             }
                             pageRangeDisplayed={5}
                             onChange={(pageNumber) => {

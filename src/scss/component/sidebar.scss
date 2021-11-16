@@ -47,8 +47,9 @@
     }
   }
 
-  @include themify($themes) {
-    background: themed('sidebarColor');
+  @include themify($themes) { 
+    background: #f2f4f7;
+    // background: themed('sidebarColor');
   }
 }
 
@@ -175,7 +176,7 @@
 .sidebar__link-icon {
   font-size: 13px;
   line-height: 13px;
-  color: #b1c3c8;
+  // color: #b1c3c8;
 
   @include directify($directions) {
     #{directed('margin-right')}: 10px;
