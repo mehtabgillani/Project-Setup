@@ -452,7 +452,6 @@ const SidebarContent = ({
         </SidebarCategory>
       </ul> */}
       {/* <ul className="sidebar__block">
-        <SidebarLink title="Log Out" icon="exit" route="/log_in" />
         <SidebarLink title="Log Out" icon="exit" onClick={()=>{
           localStorage.clear()
         }} />
