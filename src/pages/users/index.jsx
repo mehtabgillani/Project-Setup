@@ -111,9 +111,7 @@ function UserList() {
                             <td>{user.age}</td>
                             <td>{user.phoneNumber}</td>
                             <td>
-                              {moment(user.birthDate).format(
-                                "DD/MM/YYYY"
-                              )}
+                              {moment(user.birthDate).format("MMM Do YYYY")}
                             </td>
                             <td>
                               <span
