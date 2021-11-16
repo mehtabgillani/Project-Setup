@@ -8,7 +8,7 @@ import Loading from "../../../shared/components/Loading";
 import LogInForm from "../../../shared/components/loginForm/LogInForm";
 import GoogleAuthBtn from "../AuthBtn/googleAuthBtn";
 import FacebookAuthBtn from "../AuthBtn/fbAuthBtn";
-
+import Logo from "../../../shared/img/logo/logo_itl.svg";
 const auth0Icon = `${process.env.PUBLIC_URL}/img/auth0.svg`;
 
 const LogIn = ({ changeIsOpenModalFireBase }) => {
@@ -24,40 +24,13 @@ const LogIn = ({ changeIsOpenModalFireBase }) => {
           <div className="account__head">
             <h3 className="account__title">
               Welcome to
-              <span className="account__logo">
-                {" "}
-                Easy
-                <span className="account__logo-accent">DEV</span>
+              <span className="account__logo"> 
+                <img className="img-fluid ml-2" src={Logo} alt="ITL" style={{width: "50px"}}/>
               </span>
-            </h3>
-            <h4 className="account__subhead subhead">
-              Start your business easily
-            </h4>
+            </h3> 
           </div>
-          <LogInForm onSubmit form="log_in_form" />
-          <div className="account__or">
-            <p>Or Easily Using</p>
-          </div>
-          <div className="account__social">
-            <FacebookAuthBtn />
-            <GoogleAuthBtn />
-            <Button
-              className="account__social-btn account__social-btn--firebase"
-              onClick={changeIsOpenModalFireBase}
-            >
-              <FirebaseIcon />
-            </Button>
-            <Button
-              className="account__social-btn account__social-btn--auth0"
-              onClick={() => loginWithRedirect({})}
-            >
-              <img
-                className="customizer__btn-icon"
-                src={auth0Icon}
-                alt="icon"
-              />
-            </Button>
-          </div>
+          <LogInForm onSubmit form="log_in_form" /> 
+         
         </div>
       </div>
     </div>

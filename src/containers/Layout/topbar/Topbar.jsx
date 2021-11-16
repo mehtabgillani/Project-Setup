@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import TopbarSidebarButton from './TopbarSidebarButton';
 import TopbarProfile from './TopbarProfile';
 import TopbarMail from './TopbarMail';
+import Logo from "../../../shared/img/logo/logo_itl.svg";
 import TopbarNotification from './TopbarNotification';
 import TopbarSearch from './TopbarSearch';
 import TopbarLanguage from './TopbarLanguage';
@@ -18,17 +19,18 @@ const Topbar = ({
         changeMobileSidebarVisibility={changeMobileSidebarVisibility}
         changeSidebarVisibility={changeSidebarVisibility}
       />
-      <Link className="topbar__logo" to="/online_marketing_dashboard" />
+      <Link className="topbar__logo" to="#" />
+      {/* <Link className="topbar__logo" to="/online_marketing_dashboard" /> */}
     </div>
     <div className="topbar__right">
-      <div className="topbar__right-search">
+      {/* <div className="topbar__right-search">
         <TopbarSearch />
-      </div>
+      </div> */}
       <div className="topbar__right-over">
-        <TopbarNotification />
-        <TopbarMail new />
+        {/* <TopbarNotification /> */}
+        {/* <TopbarMail new /> */}
         <TopbarProfile user={user} />
-        <TopbarLanguage />
+        {/* <TopbarLanguage /> */}
       </div>
     </div>
   </div>

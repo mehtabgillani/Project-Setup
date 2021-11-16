@@ -40,9 +40,9 @@ const Customizer = ({
 
   return (
     <div className="customizer">
-      <button className="customizer__btn" type="button" onClick={handleOpen}>
+      {/* <button className="customizer__btn" type="button" onClick={handleOpen}>
         <img className="customizer__btn-icon" src={settings} alt="icon" />
-      </button>
+      </button> */}
       <div className={customizerClass} hidden={!isOpen}>
         <div className="customizer__title-wrap">
           <h5>Theme Customizer</h5>

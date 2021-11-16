@@ -4,7 +4,7 @@ import {
 } from '../actions/authActions';
 
 const initialState = {
-  fullName: 'Roman Johanson',
+  fullName: 'James Buchan',
   avatar: '',
 };
 

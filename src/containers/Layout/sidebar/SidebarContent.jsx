@@ -22,7 +22,7 @@ const SidebarContent = ({
           route="/user/user"
           onClick={hideSidebar}
         />
-        <SidebarLink
+        {/* <SidebarLink
           title="Online Marketing Dashboard"
           icon="home"
           route="/online_marketing_dashboard"
@@ -83,9 +83,9 @@ const SidebarContent = ({
           route="/log_in"
           icon="user"
           onClick={hideSidebar}
-        />
+        /> */}
       </ul>
-      <ul className="sidebar__block">
+      {/* <ul className="sidebar__block">
         <SidebarCategory
           title="UI Elements"
           icon="diamond"
@@ -318,8 +318,8 @@ const SidebarContent = ({
             onClick={hideSidebar}
           />
         </SidebarCategory>
-      </ul>
-      <ul className="sidebar__block">
+      </ul> */}
+      {/* <ul className="sidebar__block">
         <SidebarCategory
           title="Account"
           icon="user"
@@ -448,21 +448,13 @@ const SidebarContent = ({
             <SidebarLink title="Third Level Item" />
           </SidebarCategory>
         </SidebarCategory>
-      </ul>
-      <ul className="sidebar__block">
-        {/* <SidebarLink title="Log Out" icon="exit" route="/log_in" /> */}
+      </ul> */}
+      {/* <ul className="sidebar__block">
+        <SidebarLink title="Log Out" icon="exit" route="/log_in" />
         <SidebarLink title="Log Out" icon="exit" onClick={()=>{
           localStorage.clear()
         }} />
-      </ul>
-      <ul className="sidebar__block">
-        <SidebarLink
-          title="Documentation"
-          icon="text-align-justify"
-          route="/documentation/introduction"
-          onClick={hideSidebar}
-        />
-      </ul>
+      </ul>  */}
     </div>
   );
 };

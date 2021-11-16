@@ -250,3 +250,20 @@ path.recharts-sector {
 .react-select__value-container {
   padding: 0 8px !important;
 }
+// custom css
+.table_pagination {
+  text-align: center;
+  .page-item.active{ 
+    .page-link{  
+      background-color: #8c56af !important;
+      border-color: #8c56af !important;
+      color: #fff !important;
+    }
+  } 
+  .page-link{  
+    color: #8c56af !important;
+    &:focus{
+      box-shadow: none !important; 
+    }
+  }
+}

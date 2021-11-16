@@ -26,7 +26,7 @@ function UserList() {
           <Row className="align-items-center">
             <Col sm="6">
               <h4
-                className="page-title"
+                className="page-title mb-3"
                 onClick={() => {
                   console.log(
                     "this is my user list which i had to show",
@@ -34,7 +34,7 @@ function UserList() {
                   );
                 }}
               >
-                Admins
+                Users
               </h4>
             </Col>
           </Row>
@@ -84,22 +84,25 @@ function UserList() {
                         ))}
                     </tbody>
                   </Table>
-
-                  <div style={{ paddingLeft: "32%", paddingTop: "1%" }}>
-                    <Pagination
-                      itemClass="page-item"
-                      linkClass="page-link"
-                      activePage={activePage}
-                      itemsCountPerPage={5}
-                      totalItemsCount={
-                        users.totalPages ? users.totalPages * 5 : 5
-                      }
-                      pageRangeDisplayed={5}
-                      onChange={(pageNumber) => {
-                        dispatch(changeUserActivePage(pageNumber));
-                      }}
-                    />
-                  </div>
+                    <Row className="justify-content-center mt-2" >
+                      <Col lg="3">
+                        <div className="table_pagination">
+                          <Pagination
+                            itemClass="page-item"
+                            linkClass="page-link"
+                            activePage={activePage}
+                            itemsCountPerPage={5}
+                            totalItemsCount={
+                              users.totalPages ? users.totalPages * 5 : 5
+                            }
+                            pageRangeDisplayed={5}
+                            onChange={(pageNumber) => {
+                              dispatch(changeUserActivePage(pageNumber));
+                            }}
+                          />
+                        </div>
+                      </Col>
+                    </Row>
                 </>
               </CardBody>
             </Card>
