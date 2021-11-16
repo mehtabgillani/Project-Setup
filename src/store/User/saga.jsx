@@ -14,10 +14,10 @@ function* fetchUsers({ payload }) {
 function* deleteUser({ payload }) {
   console.log(payload);
   try {
-    const response =yield axios.get(`/admin/users?page=2`);
-    yield put(push("/admins"));
+    const response =yield axios.delete(`/admin/users/${payload}`);
+    yield put(push("/user/user"));
   } catch (error) {
- 
+
   }
 }
 

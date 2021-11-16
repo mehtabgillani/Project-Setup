@@ -3,21 +3,24 @@ import { Container, Row, Col, Card, CardBody, Table, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Pagination from "react-js-pagination";
-import { getUsersList, changeUserActivePage } from "../../store/User/actions";
-
+import {
+  getUsersList,
+  changeUserActivePage,
+  deleteUser,
+} from "../../store/User/actions";
+import Delete from "../../assets/icons/delete.svg";
+import DeleteModal from "./components/modal";
 function UserList() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.Users.usersList);
-  const activePage = useSelector((state) => state.Users.userActivePage);
-  const history = useHistory();
+  const users = useSelector((state) => state.Users);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    dispatch(
-      getUsersList({
-        page: activePage,
-      })
-    );
-  }, [activePage]);
+    dispatch(getUsersList({page: users.userActivePage}));
+    
+  }, [users.userActivePage]);
+
 
   return (
     <React.Fragment>
@@ -30,7 +33,7 @@ function UserList() {
                 onClick={() => {
                   console.log(
                     "this is my user list which i had to show",
-                    users
+                    users.usersList
                   );
                 }}
               >
@@ -39,6 +42,16 @@ function UserList() {
             </Col>
           </Row>
         </div>
+        <DeleteModal
+          actionFunction={deleteUser}
+          id={userId}
+          modal={deleteModal}
+          setModal={setDeleteModal}
+          color="danger"
+          title="Delete User!"
+          header
+          message="Are you sure you want to delete this user? "
+        />
 
         <Row>
           <Col lg="12">
@@ -67,10 +80,10 @@ function UserList() {
                     </thead>
 
                     <tbody>
-                      {users.data &&
-                        users.data.users &&
-                        users.data.users &&
-                        users.data.users.map((user) => (
+                      {users.usersList.data &&
+                        users.usersList.data.users &&
+                        users.usersList.data.users &&
+                        users.usersList.data.users.map((user) => (
                           <tr>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
@@ -78,7 +91,17 @@ function UserList() {
                             <td>{user.phoneNumber}</td>
                             <td>{user.birthDate}</td>
                             <td>
-                              <Button>delete</Button>{" "}
+                              <span
+                                id={`delete_${user.username}`}
+                                style={{ marginRight: "5px" }}
+                                onClick={() => {
+                                  setDeleteModal(true);
+                                  console.log("i am here for you");
+                                  setUserId(user.id);
+                                }}
+                              >
+                                <img style={{ height: "22px" }} src={Delete} />
+                              </span>
                             </td>
                           </tr>
                         ))}
@@ -108,44 +131,6 @@ function UserList() {
             </Card>
           </Col>
         </Row>
-
-        {/* <Modal isOpen={openModal} toggle={() => toggleDeleteModal(null)}>
-          <div className="modal-header">
-            <h5 className="modal-title mt-0" id="myModalLabel">
-              Confirm!
-            </h5>
-            <button
-              type="button"
-              onClick={() => toggleDeleteModal(null)}
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <ModalBody>
-            <p>Are you sure you want to delete this admin permanently?</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              type="button"
-              color="secondary"
-              onClick={() => toggleDeleteModal(null)}
-              className="waves-effect"
-            >
-              Cancel
-            </Button>
-            <Button
-              type="button"
-              color="danger"
-              onClick={() => deleteSelectedUser(userId)}
-              className="waves-effect waves-light"
-            >
-              Confirm
-            </Button>
-          </ModalFooter>
-        </Modal> */}
       </Container>
     </React.Fragment>
   );
