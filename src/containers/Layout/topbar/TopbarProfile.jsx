@@ -68,6 +68,7 @@ const TopbarProfile = ({ user, auth0 }) => {
           {auth0.isAuthenticated && (
             <TopbarMenuLink
               title="Log Out"
+              path="/"
               icon="exit" 
               onClick={()=>{
                 localStorage.clear()
@@ -76,9 +77,10 @@ const TopbarProfile = ({ user, auth0 }) => {
           )
           }
           <TopbarMenuLink
-            title="Log Out"
+            title="Logasdasd Out"
             icon="exit" 
-            // onClick={logout}
+            path="/"
+           
             onClick={()=>{
               localStorage.clear()
             }}
