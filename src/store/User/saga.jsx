@@ -5,6 +5,7 @@ import { GET_USERS_LIST, DELETE_USER } from "./constant";
 import { getUsersListSuccess,getUsersList,changeUserActivePage } from "./actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { sagaErrorHandler } from "../sagaErrorHandler";
 
 function* fetchUsers({ payload }) {
   try {
@@ -14,7 +15,7 @@ function* fetchUsers({ payload }) {
     }
     yield put(getUsersListSuccess(response.data));
   } catch (error) {
-
+    yield sagaErrorHandler(error.response);
   }
 }
 
@@ -24,7 +25,7 @@ function* deleteUser({ payload }) {
     toast.success(response.data.message);
     yield put(getUsersList({page:payload.page}));
   } catch (error) {
-
+    yield sagaErrorHandler(error.response);
   }
 }
 
