@@ -4,6 +4,7 @@ import { Button, ButtonToolbar, Modal } from "reactstrap";
 import classNames from "classnames";
 
 const DeleteModal = ({
+    page,
   color,
   title,
   message,
@@ -40,7 +41,6 @@ const DeleteModal = ({
 
   return (
     <div>
-      {console.log("user id in delete Modal", id)}
       <Modal
         isOpen={modal}
         toggle={() => setModal(false)}
@@ -65,7 +65,10 @@ const DeleteModal = ({
             className="modal_ok"
             color={color}
             onClick={() => {
-              dispatch(actionFunction(id));
+              dispatch(actionFunction({
+                  id:id,
+                  page:page
+                }));
               setModal(false);
             }}
           >

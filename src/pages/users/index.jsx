@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, CardBody, Table, Button } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import {
   getUsersList,
@@ -18,10 +17,9 @@ function UserList() {
 
   useEffect(() => {
     dispatch(getUsersList({page: users.userActivePage}));
-    
+    console.log("i am the first use effect with dependency")
   }, [users.userActivePage]);
-
-
+ 
   return (
     <React.Fragment>
       <Container fluid>
@@ -43,6 +41,7 @@ function UserList() {
           </Row>
         </div>
         <DeleteModal
+        page={users.userActivePage}
           actionFunction={deleteUser}
           id={userId}
           modal={deleteModal}
@@ -99,7 +98,6 @@ function UserList() {
                                 style={{ marginRight: "5px" }}
                                 onClick={() => {
                                   setDeleteModal(true);
-                                  console.log("i am here for you");
                                   setUserId(user.id);
                                 }}
                               >
@@ -113,13 +111,13 @@ function UserList() {
                     <Row className="justify-content-center mt-3" >
                       <Col lg="3">
                         <div className="table_pagination">
-                          <Pagination
+                        <Pagination
                             itemClass="page-item"
                             linkClass="page-link"
                             activePage={users.userActivePage}
-                            itemsCountPerPage={5}
+                            itemsCountPerPage={8}
                             totalItemsCount={
-                              users.usersList.totalPages ? users.usersList.totalPages * 5 : 5
+                              users.usersList.totalPages ? users.usersList.totalPages * 8 : 8
                             }
                             pageRangeDisplayed={5}
                             onChange={(pageNumber) => {
