@@ -46,7 +46,7 @@ function UserList() {
           id={userId}
           modal={deleteModal}
           setModal={setDeleteModal}
-          color="danger"
+          color="primary"
           title="Delete User!"
           header
           message="Are you sure you want to delete this user? "

@@ -33,8 +33,9 @@
 	"app_dashboard": {
 		"page_title": "DE App Dashboard",
 		"current_users": "Current Users",
+		"total_users": "Total Users",
 		"active_users": "Active Users",
-		"widget_sessions": "Sessions",
+		"widget_subscriptions": "subscriptions",
 		"widget_active_users": "Active Users",
 		"widget_new_users": "New Users",
 		"widget_pageviews": "Pageviews",

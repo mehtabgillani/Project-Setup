@@ -10,7 +10,7 @@
   @include directify($directions) {
     #{directed('padding-left')}: 0px;
   }
-  padding-top: 80px;
+  padding-top: 75px;
   min-height: 100vh;
   transition: padding-left 0.3s;
 

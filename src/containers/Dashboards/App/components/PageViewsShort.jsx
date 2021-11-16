@@ -18,7 +18,7 @@ const PageViewsShort = () => {
               <TrendingDownIcon className="dashboard__trend-icon" />
             </div>
             <div className="mobile-app-widget__title">
-              <h5>{t('app_dashboard.widget_pageviews')}</h5>
+              <h5>{t('app_dashboard.connections_made')}</h5>
             </div>
             <div className="progress-wrap progress-wrap--small
         progress-wrap--turquoise-gradient progress-wrap--label-top"

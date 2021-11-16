@@ -16,13 +16,20 @@ const SidebarContent = ({
   return (
     <div className="sidebar__content">
       <ul className="sidebar__block">
-      <SidebarLink
-          title="Users"
-          icon="home"
-          route="/user/user"
+        <SidebarLink
+          title="Dashboard"
+          icon="smartphone"
+          route="/app_dashboard"
           onClick={hideSidebar}
         />
-        {/* <SidebarLink
+         <SidebarLink
+          title="Users"
+          route="/user/user"
+          icon="user"
+          onClick={hideSidebar}
+        />
+{/*         
+        <SidebarLink
           title="Online Marketing Dashboard"
           icon="home"
           route="/online_marketing_dashboard"
@@ -77,13 +84,8 @@ const SidebarContent = ({
           >
             <p className="sidebar__link-title">Dark Theme</p>
           </button>
-        </SidebarCategory>
-        <SidebarLink
-          title="Log In"
-          route="/log_in"
-          icon="user"
-          onClick={hideSidebar}
-        /> */}
+        </SidebarCategory> */}
+       
       </ul>
       {/* <ul className="sidebar__block">
         <SidebarCategory

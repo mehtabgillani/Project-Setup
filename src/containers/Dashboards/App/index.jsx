@@ -24,19 +24,20 @@ const AppDashboard = ({ rtl }) => {
         </Col>
       </Row>
       <Row>
-        <CurrentUsers />
-        <ActiveUsers dir={rtl.direction} />
-      </Row>
-      <Row>
+        <NewUsersShort />
         <SessionShort />
         <ActiveUsersShort />
-        <NewUsersShort />
         <PageViewsShort />
       </Row>
       <Row>
-        <AppTileClicks dir={rtl.direction} />
         <WeeklyStatMobile />
-        <SocialMarketing />
+        <ActiveUsers dir={rtl.direction} />
+        <CurrentUsers />
+      </Row>
+      
+      <Row> 
+        {/* <AppTileClicks dir={rtl.direction} />
+        <SocialMarketing /> */}
       </Row>
     </Container>
   );
