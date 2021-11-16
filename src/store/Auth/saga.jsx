@@ -18,7 +18,7 @@ function* loginUser({ payload }) {
         localStorage.setItem('token', 'hjvabkjdansdhbajsnldkasbdjnaksdb')
         yield put(loginSuccess(response.data));
         toast.success("Login Successfully");
-        yield put(push('/user/user'));
+        yield put(push('/app_dashboard'));
 
     } catch (error) {
         yield sagaErrorHandler(error.response);
