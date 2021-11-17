@@ -3,18 +3,12 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import FirebaseIcon from 'mdi-react/FirebaseIcon';
 import withAuthFirebase from '../../../shared/components/auth/withAuthFirebase';
-import { useAuth0 } from '../../../shared/components/auth/withAuth0';
 import Loading from '../../../shared/components/Loading';
 import LogInFormPhoto from '../../../shared/components/loginPhotoForm/LogInFormPhoto';
 import GoogleAuthBtn from '../AuthBtn/googleAuthBtn';
 import FacebookAuthBtn from '../AuthBtn/fbAuthBtn';
 
-const auth0Icon = `${process.env.PUBLIC_URL}/img/auth0.svg`;
-
 const LogInPhoto = ({ changeIsOpenModalFireBase }) => {
-  const {
-    loginWithRedirect, loading,
-  } = useAuth0();
 
   if (loading) {
     return (<Loading loading={loading} />);
@@ -48,8 +42,7 @@ const LogInPhoto = ({ changeIsOpenModalFireBase }) => {
             >
               <FirebaseIcon />
             </Button>
-            <Button className="account__social-btn account__social-btn--auth0" onClick={() => loginWithRedirect({})}>
-              <img className="customizer__btn-icon" src={auth0Icon} alt="icon" />
+            <Button  onClick={() => loginWithRedirect({})}>
             </Button>
           </div>
         </div>

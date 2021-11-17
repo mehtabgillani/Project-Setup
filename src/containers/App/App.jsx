@@ -9,22 +9,19 @@ import { LoadScript } from "@react-google-maps/api";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "bootstrap/dist/css/bootstrap.css";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme , ThemeProvider } from "@material-ui/core/styles";
 import "../../scss/app.scss";
 import PropTypes from "prop-types";
 import Router from "./Router";
-// import store from './store';
 import { store, persistor, history } from "./store";
 import ScrollToTop from "./ScrollToTop";
 import { config as i18nextConfig } from "../../translations";
 import firebaseConfig from "../../config/firebase";
-import Auth0Provider from "../../shared/components/auth/withAuth0";
-import auth0Config from "../../config/auth0";
 
 i18n.init(i18nextConfig);
 
 const ThemeComponent = ({ children, themeName }) => {
-  const theme = createMuiTheme({
+  const theme = createTheme ({
     palette: {
       type: themeName === "theme-dark" ? "dark" : "light",
     },
@@ -47,26 +44,8 @@ const App = () => {
     firebase.initializeApp(firebaseConfig);
   }, []);
 
-  const onRedirectCallbackAuth0 = (appState) => {
-    window.history.replaceState(
-      {},
-      document.title,
-      appState && appState.targetUrl
-        ? appState.targetUrl
-        : window.location.pathname
-    );
-  };
-
   return (
     <Provider store={store}>
-      <Auth0Provider
-        domain={auth0Config.domain}
-        clientId={auth0Config.clientId}
-        redirectUri={`${window.location.origin}/easydev/online_marketing_dashboard`}
-        returnTo={`${window.location.origin}/easydev/online_marketing_dashboard`}
-        onRedirectCallback={onRedirectCallbackAuth0}
-      >
-       
         <ConnectedRouter history={history}>
         <ToastContainer autoClose={8000} />
           <PersistGate persistor={persistor}>
@@ -83,7 +62,6 @@ const App = () => {
             </I18nextProvider>
           </PersistGate>
         </ConnectedRouter>
-      </Auth0Provider>
     </Provider>
   );
 };

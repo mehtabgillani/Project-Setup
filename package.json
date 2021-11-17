@@ -2,7 +2,7 @@
   "name": "easydev",
   "version": "3.4.0",
   "private": true,
-  "homepage": "https://previews.aspirity.com/easydev",
+  "homepage": "https://previews.aspirity.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.24",
-    "@auth0/auth0-spa-js": "^1.11.0",
     "@brainhubeu/react-carousel": "^1.19.17",
     "@material-ui/core": "^4.10.1",
     "@react-google-maps/api": "^1.9.9",

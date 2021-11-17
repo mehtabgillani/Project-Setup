@@ -252,7 +252,7 @@ const ResourcesLinks = () => (
       </div>
       <ul>
         <li className="li-title">
-          New feature for EasyDEV - the authorization! Now you can authorize with your Firebase, Auth0,
+          New feature for EasyDEV - the authorization! Now you can authorize with your Firebase, ,
           Google and Facebook accounts and even create Firebase account.
         </li>
         <li className="li-title">Account</li>

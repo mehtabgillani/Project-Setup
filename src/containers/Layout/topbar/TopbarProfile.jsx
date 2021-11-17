@@ -3,11 +3,10 @@ import DownIcon from 'mdi-react/ChevronDownIcon';
 import { Collapse } from 'reactstrap';
 import TopbarMenuLink from './TopbarMenuLink';
 import { UserProps, AuthOProps } from '../../../shared/prop-types/ReducerProps';
-import { hookAuth0 } from '../../../shared/components/auth/withAuth0';
 
 const Ava = `${process.env.PUBLIC_URL}/img/ava.png`;
 
-const TopbarProfile = ({ user, auth0 }) => {
+const TopbarProfile = ({ user }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleProfile = () => {
@@ -23,11 +22,11 @@ const TopbarProfile = ({ user, auth0 }) => {
       <button className="topbar__avatar" type="button" onClick={toggleProfile}>
         <img
           className="topbar__avatar-img"
-          src={(auth0.user && auth0.user.picture) || user.avatar || Ava}
+          src={Ava}
           alt="avatar"
         />
         <p className="topbar__avatar-name">
-          { auth0.loading ? 'Loading...' : (auth0.user && auth0.user.name) || user.fullName}
+          {user.fullName}
         </p>
         <DownIcon className="topbar__icon" />
       </button>
@@ -65,17 +64,7 @@ const TopbarProfile = ({ user, auth0 }) => {
             path="/account/profile"
             onClick={toggleProfile}
           /> */}
-          {auth0.isAuthenticated && (
-            <TopbarMenuLink
-              title="Log Out"
-              path="/"
-              icon="exit" 
-              onClick={()=>{
-                localStorage.clear()
-              }}
-            />
-          )
-          }
+         
           <TopbarMenuLink
             title="Log Out"
             icon="exit" 
@@ -93,7 +82,6 @@ const TopbarProfile = ({ user, auth0 }) => {
 
 TopbarProfile.propTypes = {
   user: UserProps.isRequired,
-  auth0: AuthOProps.isRequired,
 };
 
-export default hookAuth0(TopbarProfile);
+export default TopbarProfile;

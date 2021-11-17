@@ -19,7 +19,7 @@ const Topbar = ({
         changeMobileSidebarVisibility={changeMobileSidebarVisibility}
         changeSidebarVisibility={changeSidebarVisibility}
       />
-      <Link className="topbar__logo" to="#" />
+      <Link className="topbar__logo" to="/app_dashboard" />
       {/* <Link className="topbar__logo" to="/online_marketing_dashboard" /> */}
     </div>
     <div className="topbar__right">
