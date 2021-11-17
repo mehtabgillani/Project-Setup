@@ -14,7 +14,7 @@ const Header = () => (
         <Col md={12}>
           <h2 className="landing__header-title">The best documented and cleanest coded
             <b> React Bootstrap 4</b> Admin Template <br />+ <b>Seed Project</b> Inside!<br />
-            + (NEW) <b>Authorization</b> with Firebase, Auth0, Google and Facebook accounts
+            + (NEW) <b>Authorization</b> with Firebase, , Google and Facebook accounts
           </h2>
           <p className="landing__header-subhead">We guarantee you will always get the actual version of the template
             with a bunch of{' '}

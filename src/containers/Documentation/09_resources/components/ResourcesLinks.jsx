@@ -174,8 +174,8 @@ const ResourcesLinks = () => (
       <ul>
         <li><p>Firebase <a href="https://firebase.google.com/docs"> https://firebase.google.com/docs</a></p></li>
         <li>
-          <p>Auth0
-            <a href="https://auth0.com/docs/quickstart/spa/react"> React</a>
+          <p>
+            <a href="https://.com/docs/quickstart/spa/react"> React</a>
           </p>
         </li>
       </ul>

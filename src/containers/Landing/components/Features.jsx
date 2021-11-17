@@ -30,7 +30,7 @@ const Features = () => (
               </div>
               <p className="landing__feature-title">Authorization</p>
               <p className="landing__feature-caption">
-                Authorization with Firebase, Auth0, Google and Facebook accounts
+                Authorization with Firebase, Google and Facebook accounts
               </p>
             </div>
             <div className="landing__feature">
