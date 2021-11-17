@@ -20,6 +20,7 @@ import Documentation from './ThemeRoutes/Documentation';
 import Commerce from './ThemeRoutes/Commerce';
 import Finance from './ThemeRoutes/Finance';
 import User from "./AppRoutes/User"
+import AddUser from "./AppRoutes/AddUser"
 
 export default () => (
   <div>
@@ -45,6 +46,7 @@ export default () => (
       <Route path="/documentation" component={Documentation} />
       {/* //Admin Panel Routes */}
       <Route path="/user" component={User} />
+      <Route path="/add-user" component={AddUser} />
     </div>
   </div>
 );
