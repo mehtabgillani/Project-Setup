@@ -3,11 +3,10 @@ import DownIcon from 'mdi-react/ChevronDownIcon';
 import { Collapse } from 'reactstrap';
 import TopbarMenuLink from './TopbarMenuLink';
 import { UserProps, AuthOProps } from '../../../shared/prop-types/ReducerProps';
-import { hookAuth0 } from '../../../shared/components/auth/withAuth0';
 
 const Ava = `${process.env.PUBLIC_URL}/img/ava.png`;
 
-const TopbarProfile = ({ user, auth0 }) => {
+const TopbarProfile = ({ user }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const toggleProfile = () => {
@@ -83,7 +82,6 @@ const TopbarProfile = ({ user, auth0 }) => {
 
 TopbarProfile.propTypes = {
   user: UserProps.isRequired,
-  auth0: AuthOProps.isRequired,
 };
 
-export default hookAuth0(TopbarProfile);
+export default TopbarProfile;
