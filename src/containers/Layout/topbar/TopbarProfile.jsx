@@ -23,11 +23,11 @@ const TopbarProfile = ({ user, auth0 }) => {
       <button className="topbar__avatar" type="button" onClick={toggleProfile}>
         <img
           className="topbar__avatar-img"
-          src={(auth0.user && auth0.user.picture) || user.avatar || Ava}
+          src=""
           alt="avatar"
         />
         <p className="topbar__avatar-name">
-          { auth0.loading ? 'Loading...' : (auth0.user && auth0.user.name) || user.fullName}
+          {user.fullName}
         </p>
         <DownIcon className="topbar__icon" />
       </button>
@@ -65,17 +65,7 @@ const TopbarProfile = ({ user, auth0 }) => {
             path="/account/profile"
             onClick={toggleProfile}
           /> */}
-          {auth0.isAuthenticated && (
-            <TopbarMenuLink
-              title="Log Out"
-              path="/"
-              icon="exit" 
-              onClick={()=>{
-                localStorage.clear()
-              }}
-            />
-          )
-          }
+         
           <TopbarMenuLink
             title="Log Out"
             icon="exit" 
