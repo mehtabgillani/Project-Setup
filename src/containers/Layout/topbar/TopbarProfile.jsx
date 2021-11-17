@@ -22,7 +22,7 @@ const TopbarProfile = ({ user }) => {
       <button className="topbar__avatar" type="button" onClick={toggleProfile}>
         <img
           className="topbar__avatar-img"
-          src=""
+          src={Ava}
           alt="avatar"
         />
         <p className="topbar__avatar-name">
