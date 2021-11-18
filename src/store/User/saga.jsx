@@ -41,7 +41,7 @@ function* deleteUser({ payload }) {
 }
 function* addUser({ payload }) {
   try {
-     
+      
     // console.log("token in fetch user api",token)
     // const headers = { headers: { Authorization: `Bearer ${token}`}};
     // const response = yield axios.get(`/admin/users?page=${payload.page}`,headers);
