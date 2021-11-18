@@ -3,6 +3,7 @@ import {
   GET_USERS_LIST,
   CHANGE_USER_ACTIVE_PAGE,
   DELETE_USER,
+  ADD_USER
 } from "./constant";
 
 export const getUsersList = (data) => {
@@ -29,5 +30,12 @@ export const deleteUser = (data) => {
   return {
     type: DELETE_USER,
     payload: data,
+  };
+};
+
+export const addNewUser = (data) => {
+  return {
+      type: ADD_USER,
+      payload: data
   };
 };

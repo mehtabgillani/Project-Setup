@@ -1,11 +1,12 @@
 import { fork, put, all, takeLatest,select } from "redux-saga/effects";
 import { push } from "connected-react-router";
 import axios from "../../config/axios";
-import { GET_USERS_LIST, DELETE_USER } from "./constant";
+import { GET_USERS_LIST, DELETE_USER, ADD_USER } from "./constant";
 import {
   getUsersListSuccess,
   getUsersList,
   changeUserActivePage,
+  addNewUser,
 } from "./actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -38,7 +39,20 @@ function* deleteUser({ payload }) {
     yield sagaErrorHandler(error.response);
   }
 }
-
+function* addUser({ payload }) {
+  try {
+     
+    // console.log("token in fetch user api",token)
+    // const headers = { headers: { Authorization: `Bearer ${token}`}};
+    // const response = yield axios.get(`/admin/users?page=${payload.page}`,headers);
+    // if (response.data.data.users.length == 0) {
+    //   yield put(changeUserActivePage(response.data.totalPages));
+    // }
+    // yield put(getUsersListSuccess(response.data));
+  } catch (error) {
+    // yield sagaErrorHandler(error.response);
+  }
+}
 export function* watchFetchUsers() {
   yield takeLatest(GET_USERS_LIST, fetchUsers);
 }
@@ -46,7 +60,10 @@ export function* watchFetchUsers() {
 export function* watchDeleteUser() {
   yield takeLatest(DELETE_USER, deleteUser);
 }
+export function* watchAddUser() {
+  yield takeLatest(ADD_USER, addUser);
+}
 
 export default function* UserSaga() {
-  yield all([fork(watchFetchUsers), fork(watchDeleteUser)]);
+  yield all([fork(watchFetchUsers), fork(watchDeleteUser), fork(watchAddUser)]);
 }

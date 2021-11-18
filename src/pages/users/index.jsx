@@ -7,6 +7,7 @@ import {
   CardBody,
   Table,
   Tooltip,
+  Button,
 } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Pagination from "react-js-pagination";
@@ -18,6 +19,9 @@ import {
 import Delete from "../../assets/icons/delete.svg";
 import DeleteModal from "./components/modal";
 import moment from "moment";
+
+import { useHistory } from "react-router-dom";
+
 function UserList() {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.Users);
@@ -33,7 +37,11 @@ function UserList() {
   useEffect(() => {
     dispatch(getUsersList({ page: users.userActivePage }));
   }, [users.userActivePage]);
-
+  const history = useHistory(); 
+  const routeChange = () =>{ 
+    let path = `/add-user`; 
+    history.push(path);
+  }
   return (
     <React.Fragment>
       <Container fluid>
@@ -51,6 +59,11 @@ function UserList() {
               >
                 Users
               </h4>
+            </Col>
+            <Col className="text-right" sm="6"> 
+              <Button className="mb-3" size="sm" color="primary"
+                onClick={routeChange}
+              >Add User</Button>
             </Col>
           </Row>
         </div>
