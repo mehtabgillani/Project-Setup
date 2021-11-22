@@ -8,7 +8,20 @@
     text-align: directed('left');
     direction: directed('direction');
   }
-
+  .custom_select{
+    select{
+      width: 100%;
+      padding: 5px 10px;
+      font-size: 12px;
+      height: 32px;
+      transition: border 0.3s;
+      background: transparent;
+      border-radius: unset;
+      margin-left: -1px;
+      border: 1px solid #ced4da;
+    }
+    
+  }
   input, textarea {
     width: 100%;
     padding: 5px 10px;
@@ -33,7 +46,7 @@
     }
 
     @include themify($themes) {
-      border: 1px solid themed('colorFieldsBorder');
+      // border: 1px solid themed('colorFieldsBorder');
       color: themed('colorText');
     }
 
@@ -165,7 +178,9 @@
     }
   }
 }
-
+.add_new_user{
+  display: block !important;
+}
 .form__half {
   width: calc(50% - 15px);
   height: 100%;

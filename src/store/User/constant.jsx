@@ -2,4 +2,6 @@ export const GET_USERS_LIST_SUCCESS = 'get_users_list_success';
 export const GET_USERS_LIST = 'get_users_list';
 export const CHANGE_USER_ACTIVE_PAGE = 'change_user_active_page';
 export const DELETE_USER = 'delete_user';
-export const ADD_USER = 'add_user';
+export const REGISTRATION_FORM_DROPDOWNS = 'registration_form_dropdowns';
+export const REGISTRATION_FORM_DROPDOWNS_SUCCESS = 'registration_form_dropdown_success'; 
+export const ADD_USER = 'add_user'; 

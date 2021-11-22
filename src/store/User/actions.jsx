@@ -3,6 +3,8 @@ import {
   GET_USERS_LIST,
   CHANGE_USER_ACTIVE_PAGE,
   DELETE_USER,
+  REGISTRATION_FORM_DROPDOWNS,
+  REGISTRATION_FORM_DROPDOWNS_SUCCESS,
   ADD_USER
 } from "./constant";
 
@@ -36,6 +38,17 @@ export const deleteUser = (data) => {
 export const addNewUser = (data) => {
   return {
       type: ADD_USER,
+      payload: data
+  };
+};
+export const fetchRegistrationDropdown = () => { 
+  return {
+      type: REGISTRATION_FORM_DROPDOWNS, 
+  };
+};
+export const  fetchRegistrationDropdownSuccess = (data) => {
+  return {
+      type: REGISTRATION_FORM_DROPDOWNS_SUCCESS,
       payload: data
   };
 };
