@@ -52,8 +52,8 @@ function* deleteUser({ payload }) {
 }
 function* addUser({ payload }) {
   try {
+   console.log("payload of add user",payload.photo)
     const token = yield select(makeSelectAuthToken());
-    const headers = { headers: { Authorization: `Bearer ${token}` } };
     let data = {
       email: payload.email,
       password: payload.password,
@@ -68,9 +68,15 @@ function* addUser({ payload }) {
       build: payload.buildIs,
       ethnicity: payload.ethnicity,
       lookingToMeets: [payload.lookingFor],
-      // "photo": payload.photo,
+      photos: [payload.photo],
     };
-    const response = yield axios.post(`/admin/users`, data, headers);
+    const response = yield axios.post(`/admin/users`, data, {
+      headers: {
+        // "Content-Type": "multipart/form-data",
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     toast.success("User created Successfully");
     yield put(push("/user/user"));
   } catch (error) {
