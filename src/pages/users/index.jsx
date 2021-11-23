@@ -15,6 +15,7 @@ import {
   getUsersList,
   changeUserActivePage,
   deleteUser,
+  updateAction,
 } from "../../store/User/actions";
 import Delete from "../../assets/icons/delete.svg";
 // import Edit from "../../assets/icons/edit.svg"; 
@@ -42,11 +43,11 @@ function UserList() {
   useEffect(() => {
     dispatch(getUsersList({ page: users.userActivePage }));
   }, [users.userActivePage]);
-  const history = useHistory(); 
-  const routeChange = () =>{ 
-    let path = `/add-user`; 
+  const history = useHistory();
+  const routeChange = () => {
+    let path = `/add-user`;
     history.push(path);
-  }
+  };
   return (
     <React.Fragment>
       <Container fluid>
@@ -56,19 +57,34 @@ function UserList() {
               <h4
                 className="page-title mb-3"
                 onClick={() => {
-                  console.log(
-                    "this is my user list which i had to show",
-                    users.usersList
-                  );
+                  // dispatch(
+                  //   updateAction({
+                  //     action: false,
+                  //     id: "",
+                  //   })
+                  // );
                 }}
               >
                 Users
               </h4>
             </Col>
-            <Col className="text-right" sm="6"> 
-              <Button className="mb-3" size="sm" color="primary"
-                onClick={routeChange}
-              >Add User</Button>
+            <Col className="text-right" sm="6">
+              <Button
+                className="mb-3"
+                size="sm"
+                color="primary"
+                onClick={()=>{
+                  routeChange();
+                  dispatch(
+                    updateAction({
+                      action: false,
+                      id: "",
+                    })
+                  );
+                }}
+              >
+                Add User
+              </Button>
             </Col>
           </Row>
         </div>
@@ -91,9 +107,9 @@ function UserList() {
                 <>
                   <Table
                     responsive
-                    striped 
-                    bordered 
-                    hover 
+                    striped
+                    bordered
+                    hover
                     size="md"
                     className="fixed"
                     style={{
@@ -120,8 +136,8 @@ function UserList() {
                         users.usersList.data.users.map((user, id) => (
                           <tr>
                             <td>{user.username}</td>
-                            {user.email && user.email.length > 23 ? (
-                              <td>{user.email.substring(0, 23)}....</td>
+                            {user.email && user.email.length > 17 ? (
+                              <td>{user.email.substring(0, 17)}....</td>
                             ) : (
                               <td>{user.email}</td>
                             )}
@@ -134,19 +150,38 @@ function UserList() {
                             <td>
 
                               <span className="d-inline-block"
+                                id={`detail_${id}`}
                                 style={{ marginRight: "5px" }}
+                                onClick={() => {
+                                
+                                }}
                                 >  
                                   <span className="text-secondary" >
                                     <EyeIcon/>
                                   </span>
                               </span>
+
+
                               <span className="d-inline-block" 
-                                style={{ marginRight: "5px" }} 
+                                  id={`Edit_${id}`}
+                                  style={{ marginRight: "5px" }}
+                                  onClick={() => {
+                                    routeChange();
+                                    dispatch(
+                                      updateAction({
+                                        action: true,
+                                        id: user.id,
+                                      })
+                                    );
+                                  }}
+
                                 >  
                                 <span className="text-primary" >
                                   <EditIcon/>
                                 </span>
+                                
                               </span>  
+                              
                               <span className="d-inline-block"
                                 id={`delete_${id}`}
                                 style={{ marginRight: "5px" }}
@@ -155,7 +190,6 @@ function UserList() {
                                   setUserId(user.id);
                                 }}
                               >
-                                {/* <img style={{ height: "22px" }} src={Delete} /> */} 
                                 <span className="text-danger" >
                                   <DeleteIcon/> 
                                 </span>
@@ -171,7 +205,27 @@ function UserList() {
                               >
                                 Delete User
                               </Tooltip>
-                              
+                              <Tooltip
+                                placement="top"
+                                isOpen={
+                                  tooltipOpenObj[`detail_${id}`] ? true : false
+                                }
+                                target={`detail_${id}`}
+                                toggle={() => toggleForToolObj1(`detail_${id}`)}
+                              >
+                                User Detail
+                              </Tooltip>
+                           
+                              <Tooltip
+                                placement="top"
+                                isOpen={
+                                  tooltipOpenObj[`Edit_${id}`] ? true : false
+                                }
+                                target={`Edit_${id}`}
+                                toggle={() => toggleForToolObj1(`Edit_${id}`)}
+                              >
+                                Edit User
+                              </Tooltip>
                             </td>
                           </tr>
                         ))}

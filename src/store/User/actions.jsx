@@ -5,8 +5,33 @@ import {
   DELETE_USER,
   REGISTRATION_FORM_DROPDOWNS,
   REGISTRATION_FORM_DROPDOWNS_SUCCESS,
-  ADD_USER
+  ADD_USER,
+  EDIT_USER,
+  GET_USER,
+  GET_USER_SUCCESS,
+  UPDATE_ACTION
 } from "./constant";
+
+
+export const updateAction = (data) => {
+  return {
+    type: UPDATE_ACTION,
+    payload: data,
+  };
+};
+
+export const getUser = (data) => {
+  return {
+    type: GET_USER,
+    payload: data,
+  };
+};
+export const getUserSuccess = (data) => {
+  return {
+    type: GET_USER_SUCCESS,
+    payload: data,
+  };
+};
 
 export const getUsersList = (data) => {
   return {
@@ -41,6 +66,14 @@ export const addNewUser = (data) => {
       payload: data
   };
 };
+
+export const updateUser = (data) => {
+  return {
+      type: EDIT_USER,
+      payload: data
+  };
+};
+
 export const fetchRegistrationDropdown = () => { 
   return {
       type: REGISTRATION_FORM_DROPDOWNS, 
