@@ -12,10 +12,12 @@ const ProfileTabs = () => {
         <div className="detailed_info profile__card tabs tabs--bordered-bottom">
           <div className="tabs__wrap"> 
             <TabContent> 
-              <Row className="pt-3 ">
+              <Row className="pt-4 ">
+                <Col xl={12}>
+                  <p className="profile__name mt-1 mb-1">More Details</p>
+                </Col>
                 <Col md={6} lg={6} xl={6}>
 
-                <p className="profile__name mt-3">More Details</p>
                   <ul class="list-group">
                     <li class="list-group-item">STI's & STD's <span class="float-right">Yes</span></li>
                     <li class="list-group-item">Sexual Orientation <span class="float-right">Straight</span></li>
