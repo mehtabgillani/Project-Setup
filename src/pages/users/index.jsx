@@ -180,7 +180,7 @@ function UserList() {
                                   id={`Edit_${id}`}
                                   style={{ marginRight: "5px" }}
                                   onClick={() => {
-                                    routeChange();
+                                    history.push('/edit-user');
                                     dispatch(
                                       updateAction({
                                         action: true,
