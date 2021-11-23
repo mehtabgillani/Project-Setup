@@ -6,6 +6,7 @@
     font-weight: 700;
     span{
       font-weight: 400;
+      text-transform: capitalize;
     }
   }
 }
@@ -123,6 +124,7 @@
 .profile__stats {
   display: flex;
   justify-content: space-around;
+  text-transform: capitalize;
 }
 
 .profile__stat {
