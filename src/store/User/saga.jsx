@@ -68,7 +68,7 @@ function* addUser({ payload }) {
       build: payload.buildIs,
       ethnicity: payload.ethnicity,
       lookingToMeets: [payload.lookingFor],
-      photos: [payload.photo],
+      // photos: [payload.photo],
     };
     const response = yield axios.post(`/admin/users`, data, {
       headers: {

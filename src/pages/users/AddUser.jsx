@@ -87,7 +87,7 @@ function AddUser() {
     buildIs: Yup.string().required("Build is required"),
     ethnicity: Yup.string().required("Ethnicity is required"),
     lookingFor: Yup.string().required("Looking to meet is required"),
-    photo: Yup.string().required("Photo is required"),
+    // photo: Yup.string().required("Photo is required"),
   });
 
   const addUserFormik = useFormik({
@@ -112,7 +112,7 @@ function AddUser() {
             buildIs: values.buildIs,
             ethnicity: values.ethnicity,
             lookingFor: values.lookingFor,
-            photo: values.photo,
+            // photo: values.photo,
           })
         );
       } else if (updateAction.action == true) {
@@ -532,7 +532,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          {/* <Col lg="3">
                         <FormGroup>
                             <Label for="ad">Add photo</Label>
                             <Input
@@ -554,7 +554,7 @@ function AddUser() {
                               </div>
                             ) : null}
                           </FormGroup>
-                        </Col>
+                        </Col> */}
                         </Row>
                         <Row>
                           <Col lg="3">
