@@ -106,8 +106,12 @@ function UserList() {
           default
           message="Are you sure you want to delete this user? "
         />
-
-        <Row>
+ { users.usersList.data &&
+                        users.usersList.data.users &&
+                        users.usersList.data.users &&
+                        users.usersList.data.users.length > 0 ?
+                        <>
+ <Row>
           <Col lg="12">
             <Card>
               <CardBody>
@@ -176,7 +180,7 @@ function UserList() {
                                   id={`Edit_${id}`}
                                   style={{ marginRight: "5px" }}
                                   onClick={() => {
-                                    routeChange();
+                                    history.push('/edit-user');
                                     dispatch(
                                       updateAction({
                                         action: true,
@@ -268,6 +272,19 @@ function UserList() {
             </Card>
           </Col>
         </Row>
+                        </>
+                        :
+                        <>
+                          <Col lg="12">
+            <Card>
+              <CardBody>
+No Data Available
+              </CardBody>
+              </Card>
+              </Col>
+                        </>
+                        }
+       
       </Container>
     </React.Fragment>
   );

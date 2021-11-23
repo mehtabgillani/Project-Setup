@@ -23,7 +23,7 @@ import {
 } from "../../store/User/actions";
 
 import EyeIcon from "mdi-react/EyeIcon";
-import moment from 'moment';
+import moment from "moment";
 function AddUser() {
   const dispatch = useDispatch();
   const dropdownOptions = useSelector(
@@ -31,7 +31,7 @@ function AddUser() {
   );
   const userDetail = useSelector((state) => state.Users.userDetail);
   const updateAction = useSelector((state) => state.Users.updateAction);
-
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     dispatch(fetchRegistrationDropdown());
     console.log("update action", updateAction);
@@ -72,16 +72,32 @@ function AddUser() {
   };
 
   const AddUserSchema = Yup.object().shape({
-    name: Yup.string().required("Usename is required").matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid name!"),
-    email: Yup.string()
-      .email("Email must be a valid email address")
-      .required("Email is required"),
-    password:Yup.string().required('Password is required')
-    .matches(
-        /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "Must contain 8 characters,  One uppercase, One lowercase, One number and one special case character"
-    ),
-    number: Yup.string().required("Phone number is required").min(10,'Phone number can not be less than 10 digits').max(17,'Phone number can not be more than 17 digits'),
+    isUpdate: Yup.boolean().default(updateAction.action),
+    name: Yup.string()
+      .required("Usename is required")
+      .matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid name!"),
+    email: Yup.mixed().when(["isUpdate"], {
+      is: true,
+      then: Yup.mixed(),
+      otherwise: Yup.string()
+        .email("Email must be a valid email address")
+        .required("Email is required"),
+    }),
+
+    password: Yup.mixed().when(["isUpdate"], {
+      is: true,
+      then: Yup.mixed(),
+      otherwise: Yup.string()
+        .required("Password is required")
+        .matches(
+          /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+          "Must contain 8 characters,  One uppercase, One lowercase, One number and one special case character"
+        ),
+    }),
+    number: Yup.string()
+      .required("Phone number is required")
+      .min(10, "Phone number can not be less than 10 digits")
+      .max(17, "Phone number can not be more than 17 digits"),
     birthdate: Yup.string().required("Birthday is required"),
     // location: Yup.string().required("Location is required"),
     height: Yup.string().required("Height is required"),
@@ -143,7 +159,6 @@ function AddUser() {
     },
   });
 
-  
   return (
     <React.Fragment>
       <Container fluid>
@@ -201,55 +216,110 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
-                            <div className="form__form-group">
-                              <span className="form__form-group-label">
-                                Email{" "}
-                              </span>
-                              <div className="form__form-group-field">
-                                <Input
-                                  className="input-without-border-radius"
-                                  name="email"
-                                  label="email"
-                                  value={addUserFormik.values.email}
-                                  onChange={addUserFormik.handleChange}
-                                  placeholder="Enter email"
-                                  type="text"
-                                />
-                              </div>
-                              {addUserFormik.touched.email &&
-                              addUserFormik.errors.email ? (
-                                <div className="text-start mb-1 text-danger">
-                                  {addUserFormik.errors.email}
+                          {updateAction.action ? (
+                            <Col lg="3">
+                              <div className="form__form-group">
+                                <span className="form__form-group-label">
+                                  Email{" "}
+                                </span>
+                                <div className="form__form-group-field">
+                                  <Input
+                                    className="input-without-border-radius"
+                                    name="email"
+                                    label="email"
+                                    value={addUserFormik.values.email}
+                                    onChange={addUserFormik.handleChange}
+                                    placeholder="Enter email"
+                                    type="text"
+                                    disabled
+                                  />
                                 </div>
-                              ) : null}
-                            </div>
-                          </Col>
-                          <Col lg="3">
-                          <div className="form__form-group">
-                              <span className="form__form-group-label">
-                                Password
-                              </span>
-                              <div className="form__form-group-field">
-                                <Input
-                                  className="input-without-border-radius"
-                                  name="password"
-                                  label="password"
-                                  value={addUserFormik.values.password}
-                                  onChange={addUserFormik.handleChange}
-                                  placeholder="Enter password"
-                                  type="text"
-                                />
+                                {addUserFormik.touched.email &&
+                                addUserFormik.errors.email ? (
+                                  <div className="text-start mb-1 text-danger">
+                                    {addUserFormik.errors.email}
+                                  </div>
+                                ) : null}
                               </div>
-                              {addUserFormik.touched.password &&
-                              addUserFormik.errors.password ? (
-                                <div className="text-start mb-1 text-danger">
-                                  {addUserFormik.errors.password}
+                            </Col>
+                          ) : (
+                            <Col lg="3">
+                              <div className="form__form-group">
+                                <span className="form__form-group-label">
+                                  Email{" "}
+                                </span>
+                                <div className="form__form-group-field">
+                                  <Input
+                                    className="input-without-border-radius"
+                                    name="email"
+                                    label="email"
+                                    value={addUserFormik.values.email}
+                                    onChange={addUserFormik.handleChange}
+                                    placeholder="Enter email"
+                                    type="text"
+                                  />
                                 </div>
-                              ) : null}
-                            </div>
-
-                          </Col>
+                                {addUserFormik.touched.email &&
+                                addUserFormik.errors.email ? (
+                                  <div className="text-start mb-1 text-danger">
+                                    {addUserFormik.errors.email}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </Col>
+                          )}
+                          {updateAction.action ? (
+                            <Col lg="3">
+                              <div className="form__form-group">
+                                <span className="form__form-group-label">
+                                  Password
+                                </span>
+                                <div className="form__form-group-field">
+                                  <Input
+                                    className="input-without-border-radius"
+                                    name="password"
+                                    label="password"
+                                    value={addUserFormik.values.password}
+                                    onChange={addUserFormik.handleChange}
+                                    placeholder="Enter password"
+                                    type="text"
+                                    disabled
+                                  />
+                                </div>
+                                {addUserFormik.touched.password &&
+                                addUserFormik.errors.password ? (
+                                  <div className="text-start mb-1 text-danger">
+                                    {addUserFormik.errors.password}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </Col>
+                          ) : (
+                            <Col lg="3">
+                              <div className="form__form-group">
+                                <span className="form__form-group-label">
+                                  Password
+                                </span>
+                                <div className="form__form-group-field">
+                                  <Input
+                                    className="input-without-border-radius"
+                                    name="password"
+                                    label="password"
+                                    value={addUserFormik.values.password}
+                                    onChange={addUserFormik.handleChange}
+                                    placeholder="Enter password"
+                                    type="text"
+                                  />
+                                </div>
+                                {addUserFormik.touched.password &&
+                                addUserFormik.errors.password ? (
+                                  <div className="text-start mb-1 text-danger">
+                                    {addUserFormik.errors.password}
+                                  </div>
+                                ) : null}
+                              </div>
+                            </Col>
+                          )}
 
                           <Col lg="3">
                             <div className="form__form-group">
@@ -520,7 +590,7 @@ function AddUser() {
                                         return (
                                           <option
                                             key={item.id}
-                                            value={item.name}
+                                            value={item.id}
                                           >
                                             {item.name}
                                           </option>
@@ -566,22 +636,40 @@ function AddUser() {
                             <div className="form__form-group">
                               <div className="form__form-group form__form-group-field"></div>
                             </div>
-                            {updateAction.action == false ? (
-                              <Button
-                                className="account__btn"
-                                type="submit"
-                                color="primary"
-                              >
-                                Create
-                              </Button>
+                            {loader == true ? (
+                            <div className="d-flex justify-content-center account__btn" style={{height:'40px',paddingTop:'3px'}}>
+                            <div className="spinner-border" role="status" style={{color:'whitesmoke'}}>
+                              <span className="sr-only">Loading...</span>
+                            </div>
+                          </div>
                             ) : (
-                              <Button
-                                className="account__btn"
-                                type="submit"
-                                color="primary"
-                              >
-                                Update
-                              </Button>
+                              <>
+                                {updateAction.action == false ? (
+                                  <Button
+                                    className="account__btn"
+                                    type="submit"
+                                    color="primary"
+                                    onClick={() => {
+                                      setLoader(true);
+                                      addUserFormik.handleSubmit();
+                                    }}
+                                  >
+                                    Create
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    className="account__btn"
+                                    type="submit"
+                                    color="primary"
+                                    onClick={() => {
+                                      setLoader(true);
+                                      addUserFormik.handleSubmit();
+                                    }}
+                                  >
+                                    Update
+                                  </Button>
+                                )}
+                              </>
                             )}
                           </Col>
                         </Row>

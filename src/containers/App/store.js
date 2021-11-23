@@ -11,7 +11,7 @@ import thunk from "redux-thunk";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["Forget", "Notification", "Users"],
+  blacklist: ["Forget", "Notification"],
 };
 
 const history = createBrowserHistory();

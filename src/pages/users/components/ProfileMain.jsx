@@ -44,7 +44,7 @@ const ProfileMain = ({userDetail}) => (
             <p className="profile__stat-title">Height</p>
           </div>
           <div className="profile__stat">
-            <p className="profile__stat-number">{userDetail.vaccinated == null ? 'Rather not say': userDetail.vaccinated}</p>
+            <p className="profile__stat-number">{userDetail.vaccinated == null ? 'Rather not say': userDetail.vaccinated ? 'Yes' : 'No' }</p>
             <p className="profile__stat-title">Vaccinated</p>
           </div>   
         </div>

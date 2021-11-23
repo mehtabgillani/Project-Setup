@@ -31,7 +31,13 @@ function* fetchUsers({ payload }) {
       headers
     );
     if (response.data.data.users.length == 0) {
-      yield put(changeUserActivePage(response.data.totalPages));
+      if(response.data.totalPages == 0)
+      {
+        yield put(changeUserActivePage(1));
+      }
+      else{
+        yield put(changeUserActivePage(response.data.totalPages));
+      }
     }
     yield put(getUsersListSuccess(response.data));
   } catch (error) {
