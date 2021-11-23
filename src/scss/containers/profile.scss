@@ -1,11 +1,23 @@
 .profile {
 
 }
-
+.detailed_info{
+  .list-group-item{
+    font-weight: 700;
+    span{
+      font-weight: 400;
+    }
+  }
+}
 .profile__card {
   height: 100%;
   padding: 0;
-
+  .profileIcon{
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 4px;
+    vertical-align: top;
+  }
   @include themify($themes) {
     background-color: themed('colorBackground');
   }
@@ -54,18 +66,21 @@
     }
   }
 }
-
+.profile_about_info{
+  padding: 30px 40px;
+}
 .profile__information {
   padding: 30px 40px;
   display: flex;
+  border-bottom: 1px solid #dfe1e6;
 
   @include directify($directions) {
     text-align: directed('left');
   }
 
-  @include themify($themes) {
-    border-bottom: 1px solid themed('colorBorder');
-  }
+  // @include themify($themes) {
+  //   border-bottom: 1px solid themed('colorBorder');
+  // }
 
   @media (max-width: 1345px) and (min-width: 1200px) {
     padding: 30px 15px;
@@ -90,10 +105,10 @@
 }
 
 .profile__avatar {
-  height: 140px;
-  width: 140px;
+  height: 100px;
+  width: 100px;
   overflow: hidden;
-  border-radius: 50%;
+  border-radius: 5%;
 
   img {
     height: 100%;
@@ -113,13 +128,13 @@
 .profile__stat {
   text-align: center;
   padding-top: 5px;
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 
 .profile__stat-number {
   color: $color-blue;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 17px;
   line-height: 24px;
   margin: 0;
 }
@@ -132,11 +147,15 @@
 }
 
 .profile__data {
-  width: calc(100% - 140px);
+  // width: calc(100% - 140px);
 
   @include directify($directions) {
-    #{directed('padding-left')}: 25px;
+    #{directed('padding-left')}: 15px;
   }
+}
+.about_profile .profile__name{
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .profile__name {

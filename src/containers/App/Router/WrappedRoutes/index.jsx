@@ -21,6 +21,7 @@ import Commerce from './ThemeRoutes/Commerce';
 import Finance from './ThemeRoutes/Finance';
 import User from "./AppRoutes/User"
 import AddUser from "./AppRoutes/AddUser"
+import ViewUser from "./AppRoutes/ViewUser"
 
 export default () => (
   <div>
@@ -47,6 +48,7 @@ export default () => (
       {/* //Admin Panel Routes */}
       <Route path="/user" component={User} />
       <Route path="/add-user" component={AddUser} />
+      <Route path="/view-user-details" component={ViewUser} />
     </div>
   </div>
 );
