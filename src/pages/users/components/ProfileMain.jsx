@@ -5,7 +5,7 @@ import {
 import MailOutlineIcon from 'mdi-react/MailOutlineIcon';
 import CallOutlineIcon from 'mdi-react/CallOutlineIcon'; 
 import CakeVariantIcon from 'mdi-react/CakeVariantIcon'; 
-
+import moment from "moment";
 const Ava = `${process.env.PUBLIC_URL}/img/12.png`;
 
 const ProfileMain = ({userDetail}) => (
@@ -28,7 +28,7 @@ const ProfileMain = ({userDetail}) => (
             </p> 
             <p className="profile__work">
               <CakeVariantIcon className="profileIcon"/> 
-              {userDetail.birthDate ? userDetail.birthDate: ''}
+              {moment(userDetail.birthDate).format("MMM Do YYYY")? moment(userDetail.birthDate).format("MMM Do YYYY"): ''}
             </p>
           </div>
         </div>
