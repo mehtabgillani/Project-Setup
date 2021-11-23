@@ -96,10 +96,13 @@ function AddUser() {
           "Must contain 8 characters,  One uppercase, One lowercase, One number and one special case character"
         ),
     }),
-    number: Yup.string()
+    number: Yup.number()
       .required("Phone number is required")
       .min(10, "Phone number can not be less than 10 digits")
-      .max(17, "Phone number can not be more than 17 digits"),
+      .max(17, "Phone number can not be more than 17 digits")
+      .typeError("Please enter digits only")
+      .integer("Please enter a valid phone number without decimal values"),
+
     birthdate: Yup.string().required("Birthday is required"),
     // location: Yup.string().required("Location is required"),
     height: Yup.string().required("Height is required"),
