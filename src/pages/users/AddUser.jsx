@@ -590,7 +590,7 @@ function AddUser() {
                                         return (
                                           <option
                                             key={item.id}
-                                            value={item.name}
+                                            value={item.id}
                                           >
                                             {item.name}
                                           </option>
