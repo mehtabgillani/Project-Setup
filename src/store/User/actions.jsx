@@ -9,7 +9,15 @@ import {
   EDIT_USER,
   GET_USER,
   GET_USER_SUCCESS,
+  UPDATE_ACTION
 } from "./constant";
+
+export const updateAction = (data) => {
+  return {
+    type: UPDATE_ACTION,
+    payload: data,
+  };
+};
 
 export const getUser = (data) => {
   return {

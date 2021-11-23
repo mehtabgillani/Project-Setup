@@ -8,3 +8,4 @@ export const ADD_USER = 'add_user';
 export const EDIT_USER = 'edit_user'; 
 export const GET_USER = 'get_user'; 
 export const GET_USER_SUCCESS = 'get_user_success'; 
+export const UPDATE_ACTION = 'update_action';

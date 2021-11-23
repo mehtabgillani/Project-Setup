@@ -4,6 +4,7 @@ import {
   CHANGE_USER_ACTIVE_PAGE,
   REGISTRATION_FORM_DROPDOWNS_SUCCESS,
   GET_USER_SUCCESS,
+  UPDATE_ACTION,
 } from "./constant";
 
 const initialState = {
@@ -26,6 +27,10 @@ const initialState = {
     lookingFor: 2,
     // photo: "",
   },
+  updateAction:{
+    action:false,
+    id:'',
+  } 
 };
 
 const Users = produce((state, action) => {
@@ -39,8 +44,11 @@ const Users = produce((state, action) => {
     case REGISTRATION_FORM_DROPDOWNS_SUCCESS:
       state.registrationDropdownValues = action.payload;
       break;
-      case GET_USER_SUCCESS:
+    case GET_USER_SUCCESS:
       state.userDetail =action.payload.data;
+      break;
+    case UPDATE_ACTION:
+      state.updateAction =action.payload;
       break;
     default:
   }

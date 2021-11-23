@@ -13,7 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { 
   addNewUser,
   fetchRegistrationDropdown,
-  getUser
+  getUser,
+  getUserSuccess
 } from "../../store/User/actions";  
  
 import EyeIcon from "mdi-react/EyeIcon"; 
@@ -22,10 +23,40 @@ function AddUser() {
   const dispatch = useDispatch();
   const dropdownOptions = useSelector((state) => state.Users.registrationDropdownValues);
   const userDetail = useSelector((state) => state.Users.userDetail);
+  const updateAction = useSelector((state) => state.Users.updateAction);
+
   useEffect(() => {
     dispatch(fetchRegistrationDropdown());
-    console.log("user detail in reducer",userDetail);
-    dispatch(getUser())
+    console.log("update action",updateAction);
+    if(updateAction.action == true)
+    {
+      dispatch(getUser(updateAction.id))
+    }
+    else if(updateAction.action == false)
+    {
+      dispatch(getUserSuccess (
+        {
+          status: "success",
+          data:{
+            name: "",
+            email: "",
+            password: "",
+            number: "",
+            birthdate: "",
+            // location: "",
+            height: "average",
+            orientation: 1,
+            gender: 10,
+            relationship: 15,
+            buildIs: 21,
+            ethnicity: 27,
+            lookingFor: 2,
+            // photo: "",
+          }
+        
+        }
+      ))
+    }
   }, []);
   const [showPassword, setShowPassword] = useState("password");
   const changePasswordState = () => {

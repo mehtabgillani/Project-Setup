@@ -15,6 +15,7 @@ import {
   getUsersList,
   changeUserActivePage,
   deleteUser,
+  updateAction,
 } from "../../store/User/actions";
 import Delete from "../../assets/icons/delete.svg";
 import DeleteModal from "./components/modal";
@@ -37,11 +38,11 @@ function UserList() {
   useEffect(() => {
     dispatch(getUsersList({ page: users.userActivePage }));
   }, [users.userActivePage]);
-  const history = useHistory(); 
-  const routeChange = () =>{ 
-    let path = `/add-user`; 
+  const history = useHistory();
+  const routeChange = () => {
+    let path = `/add-user`;
     history.push(path);
-  }
+  };
   return (
     <React.Fragment>
       <Container fluid>
@@ -51,19 +52,26 @@ function UserList() {
               <h4
                 className="page-title mb-3"
                 onClick={() => {
-                  console.log(
-                    "this is my user list which i had to show",
-                    users.usersList
+                  dispatch(
+                    updateAction({
+                      action: false,
+                      id: "",
+                    })
                   );
                 }}
               >
                 Users
               </h4>
             </Col>
-            <Col className="text-right" sm="6"> 
-              <Button className="mb-3" size="sm" color="primary"
+            <Col className="text-right" sm="6">
+              <Button
+                className="mb-3"
+                size="sm"
+                color="primary"
                 onClick={routeChange}
-              >Add User</Button>
+              >
+                Add User
+              </Button>
             </Col>
           </Row>
         </div>
@@ -86,9 +94,9 @@ function UserList() {
                 <>
                   <Table
                     responsive
-                    striped 
-                    bordered 
-                    hover 
+                    striped
+                    bordered
+                    hover
                     size="md"
                     className="fixed"
                     style={{
@@ -126,7 +134,7 @@ function UserList() {
                             <td>
                               {moment(user.birthDate).format("MMM Do YYYY")}
                             </td>
-                            <td style={{display:'flex'}}>
+                            <td style={{ display: "flex" }}>
                               <span
                                 id={`delete_${id}`}
                                 style={{ marginRight: "5px" }}
@@ -153,8 +161,13 @@ function UserList() {
                                 id={`Edit_${id}`}
                                 style={{ marginRight: "5px" }}
                                 onClick={() => {
-                                  // setDeleteModal(true);
-                                  setUserId(user.id);
+                                  routeChange();
+                                  dispatch(
+                                    updateAction({
+                                      action: true,
+                                      id: user.id,
+                                    })
+                                  );
                                 }}
                               >
                                 <img style={{ height: "22px" }} src={Delete} />

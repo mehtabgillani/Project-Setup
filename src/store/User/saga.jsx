@@ -17,7 +17,6 @@ import { makeSelectAuthToken } from "../selectors";
 function* fetchUsers({ payload }) {
   try {
     const token = yield select(makeSelectAuthToken());
-    console.log("token in fetch user api",token)
     const headers = { headers: { Authorization: `Bearer ${token}`}};
     const response = yield axios.get(`/admin/users?page=${payload.page}`,headers);
     if (response.data.data.users.length == 0) {
