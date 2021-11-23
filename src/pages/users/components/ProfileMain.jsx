@@ -14,7 +14,7 @@ const ProfileMain = ({userDetail}) => (
       <CardBody className="profile__card">
         <div className="profile__information">
           <div className="profile__avatar">
-            <img src={Ava} alt="avatar" />
+            <img src={userDetail.UserPhotos && userDetail.UserPhotos[0] ? userDetail.UserPhotos[0].url : Ava } alt="avatar" />
           </div>
           <div className="profile__data">
             <p className="profile__name">{userDetail.name ? userDetail.name: ''}</p>

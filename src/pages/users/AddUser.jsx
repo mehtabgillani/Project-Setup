@@ -72,12 +72,16 @@ function AddUser() {
   };
 
   const AddUserSchema = Yup.object().shape({
-    name: Yup.string().required("name is required"),
+    name: Yup.string().required("name is required").matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid Name!"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
-    password: Yup.string().required("Password is required"),
-    number: Yup.string().required("Phone Number is required"),
+    password:Yup.string().required('Password is required')
+    .matches(
+        /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+        "Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character"
+    ),
+    number: Yup.string().required("Phone Number is required").min(10,'Phone number can not be less than 10 digits').max(17,'Phone number can not be more than 17 digits'),
     birthdate: Yup.string().required("Birthday is required"),
     // location: Yup.string().required("Location is required"),
     height: Yup.string().required("Height is required"),
@@ -87,7 +91,7 @@ function AddUser() {
     buildIs: Yup.string().required("Build is required"),
     ethnicity: Yup.string().required("Ethnicity is required"),
     lookingFor: Yup.string().required("Looking to meet is required"),
-    photo: Yup.string().required("Photo is required"),
+    // photo: Yup.string().required("Photo is required"),
   });
 
   const addUserFormik = useFormik({
@@ -112,7 +116,7 @@ function AddUser() {
             buildIs: values.buildIs,
             ethnicity: values.ethnicity,
             lookingFor: values.lookingFor,
-            photo: values.photo,
+            // photo: values.photo,
           })
         );
       } else if (updateAction.action == true) {
@@ -533,7 +537,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          {/* <Col lg="3">
                         <FormGroup>
                             <Label for="ad">Add photo</Label>
                             <Input
@@ -555,7 +559,7 @@ function AddUser() {
                               </div>
                             ) : null}
                           </FormGroup>
-                        </Col>
+                        </Col> */}
                         </Row>
                         <Row>
                           <Col lg="3">
