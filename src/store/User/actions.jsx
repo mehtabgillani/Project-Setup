@@ -12,6 +12,7 @@ import {
   UPDATE_ACTION
 } from "./constant";
 
+
 export const updateAction = (data) => {
   return {
     type: UPDATE_ACTION,
@@ -26,7 +27,6 @@ export const getUser = (data) => {
   };
 };
 export const getUserSuccess = (data) => {
-  console.log("get user success is called")
   return {
     type: GET_USER_SUCCESS,
     payload: data,
@@ -66,6 +66,14 @@ export const addNewUser = (data) => {
       payload: data
   };
 };
+
+export const updateUser = (data) => {
+  return {
+      type: EDIT_USER,
+      payload: data
+  };
+};
+
 export const fetchRegistrationDropdown = () => { 
   return {
       type: REGISTRATION_FORM_DROPDOWNS, 
