@@ -72,15 +72,23 @@ function AddUser() {
   };
 
   const AddUserSchema = Yup.object().shape({
+    isUpdate: Yup.boolean().default(updateAction.action),
     name: Yup.string().required("Name is required").matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid Name!"),
-    email: Yup.string()
+    email: Yup.mixed().when(["isUpdate"], {
+      is: true,
+      then: Yup.mixed(),
+      otherwise: Yup.string()
       .email("Email must be a valid email address")
-      .required("Email is required"),
-    password:Yup.string().required('Password is required')
-    .matches(
-        /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character"
-    ),
+      .required("Email is required")}),
+
+      password: Yup.mixed().when(["isUpdate"], {
+        is: true,
+        then: Yup.mixed(),
+        otherwise:Yup.string().required('Password is required')
+        .matches(
+            /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            "Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character"
+        )}),
     number: Yup.string().required("Phone Number is required").min(10,'Phone number can not be less than 10 digits').max(17,'Phone number can not be more than 17 digits'),
     birthdate: Yup.string().required("Birthday is required"),
     // location: Yup.string().required("Location is required"),
@@ -201,7 +209,8 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          {updateAction.action ?
+                         <Col lg="3">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 Email{" "}
@@ -215,6 +224,7 @@ function AddUser() {
                                   onChange={addUserFormik.handleChange}
                                   placeholder="Enter Email"
                                   type="text"
+                                  disabled
                                 />
                               </div>
                               {addUserFormik.touched.email &&
@@ -225,31 +235,90 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
+                          :
                           <Col lg="3">
                           <div className="form__form-group">
-                              <span className="form__form-group-label">
-                                Password
-                              </span>
-                              <div className="form__form-group-field">
-                                <Input
-                                  className="input-without-border-radius"
-                                  name="password"
-                                  label="password"
-                                  value={addUserFormik.values.password}
-                                  onChange={addUserFormik.handleChange}
-                                  placeholder="Enter Password"
-                                  type="text"
-                                />
-                              </div>
-                              {addUserFormik.touched.password &&
-                              addUserFormik.errors.password ? (
-                                <div className="text-start mb-1 text-danger">
-                                  {addUserFormik.errors.password}
-                                </div>
-                              ) : null}
+                            <span className="form__form-group-label">
+                              Email{" "}
+                            </span>
+                            <div className="form__form-group-field">
+                              <Input
+                                className="input-without-border-radius"
+                                name="email"
+                                label="email"
+                                value={addUserFormik.values.email}
+                                onChange={addUserFormik.handleChange}
+                                placeholder="Enter Email"
+                                type="text"
+                                
+                              />
                             </div>
+                            {addUserFormik.touched.email &&
+                            addUserFormik.errors.email ? (
+                              <div className="text-start mb-1 text-danger">
+                                {addUserFormik.errors.email}
+                              </div>
+                            ) : null}
+                          </div>
+                        </Col>
 
-                          </Col>
+                          }
+                           {updateAction.action ?
+                             <Col lg="3">
+                             <div className="form__form-group">
+                                 <span className="form__form-group-label">
+                                   Password
+                                 </span>
+                                 <div className="form__form-group-field">
+                                   <Input
+                                     className="input-without-border-radius"
+                                     name="password"
+                                     label="password"
+                                     value={addUserFormik.values.password}
+                                     onChange={addUserFormik.handleChange}
+                                     placeholder="Enter Password"
+                                     type="text"
+                                     disabled
+                                   />
+                                 </div>
+                                 {addUserFormik.touched.password &&
+                                 addUserFormik.errors.password ? (
+                                   <div className="text-start mb-1 text-danger">
+                                     {addUserFormik.errors.password}
+                                   </div>
+                                 ) : null}
+                               </div>
+   
+                             </Col>
+                             :
+                             <Col lg="3">
+                             <div className="form__form-group">
+                                 <span className="form__form-group-label">
+                                   Password
+                                 </span>
+                                 <div className="form__form-group-field">
+                                   <Input
+                                     className="input-without-border-radius"
+                                     name="password"
+                                     label="password"
+                                     value={addUserFormik.values.password}
+                                     onChange={addUserFormik.handleChange}
+                                     placeholder="Enter Password"
+                                     type="text"
+                                   />
+                                 </div>
+                                 {addUserFormik.touched.password &&
+                                 addUserFormik.errors.password ? (
+                                   <div className="text-start mb-1 text-danger">
+                                     {addUserFormik.errors.password}
+                                   </div>
+                                 ) : null}
+                               </div>
+   
+                             </Col>
+                          }
+                       
+                        
 
                           <Col lg="3">
                             <div className="form__form-group">
