@@ -326,4 +326,14 @@
   .account__btns {
     flex-wrap: wrap;
   }
-}
+} 
+
+#tooltip_top, #tooltip_top_view, #tooltip_top_edit {
+  background-color: #f2f4f7 !important;
+  color: rgb(56, 54, 54) !important; 
+  border: 1px solid #c1c2c4 !important; 
+}  
+.table.table-hover tbody tr { 
+  cursor: auto;
+} 
+   
