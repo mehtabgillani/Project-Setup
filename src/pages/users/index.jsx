@@ -17,6 +17,11 @@ import {
   deleteUser,
 } from "../../store/User/actions";
 import Delete from "../../assets/icons/delete.svg";
+// import Edit from "../../assets/icons/edit.svg"; 
+import EditIcon from 'mdi-react/EditIcon';
+import DeleteIcon from 'mdi-react/DeleteIcon';
+import EyeIcon from 'mdi-react/EyeIcon';
+
 import DeleteModal from "./components/modal";
 import moment from "moment";
 
@@ -127,7 +132,22 @@ function UserList() {
                               {moment(user.birthDate).format("MMM Do YYYY")}
                             </td>
                             <td>
-                              <span
+
+                              <span className="d-inline-block"
+                                style={{ marginRight: "5px" }}
+                                >  
+                                  <span className="text-secondary" >
+                                    <EyeIcon/>
+                                  </span>
+                              </span>
+                              <span className="d-inline-block" 
+                                style={{ marginRight: "5px" }} 
+                                >  
+                                <span className="text-primary" >
+                                  <EditIcon/>
+                                </span>
+                              </span>  
+                              <span className="d-inline-block"
                                 id={`delete_${id}`}
                                 style={{ marginRight: "5px" }}
                                 onClick={() => {
@@ -135,9 +155,12 @@ function UserList() {
                                   setUserId(user.id);
                                 }}
                               >
-                                <img style={{ height: "22px" }} src={Delete} />
+                                {/* <img style={{ height: "22px" }} src={Delete} /> */} 
+                                <span className="text-danger" >
+                                  <DeleteIcon/> 
+                                </span>
                               </span>
-
+                              
                               <Tooltip
                                 placement="top"
                                 isOpen={
@@ -148,6 +171,7 @@ function UserList() {
                               >
                                 Delete User
                               </Tooltip>
+                              
                             </td>
                           </tr>
                         ))}
