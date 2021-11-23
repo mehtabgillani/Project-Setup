@@ -85,7 +85,7 @@ function* addUser({ payload }) {
       },
     });
     yield put(setLoader(false));
-    toast.success("User created Successfully");
+    toast.success("User created successfully");
     yield put(push("/user/user"));
   } catch (error) {
     yield sagaErrorHandler(error.response);
@@ -119,7 +119,7 @@ function* editUser({ payload }) {
       headers
     );
     yield put(setLoader(false));
-    toast.success("User Updated Successfully");
+    toast.success("User updated successfully");
     yield put(push("/user/user"));
   } catch (error) {
     yield sagaErrorHandler(error.response);
