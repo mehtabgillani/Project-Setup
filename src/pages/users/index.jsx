@@ -16,6 +16,7 @@ import {
   changeUserActivePage,
   deleteUser,
   updateAction,
+  getUser
 } from "../../store/User/actions";
 import Delete from "../../assets/icons/delete.svg";
 // import Edit from "../../assets/icons/edit.svg"; 
@@ -153,6 +154,8 @@ function UserList() {
                                 id={`detail_${id}`}
                                 style={{ marginRight: "5px" }}
                                 onClick={() => {
+                                history.push('/view-user-details')
+                                dispatch(getUser(user.id));
                                 
                                 }}
                                 >  
@@ -181,7 +184,7 @@ function UserList() {
                                 </span>
                                 
                               </span>  
-                              
+
                               <span className="d-inline-block"
                                 id={`delete_${id}`}
                                 style={{ marginRight: "5px" }}
