@@ -11,6 +11,7 @@ import {
   GET_USER_SUCCESS,
   UPDATE_ACTION,
   GET_USER_DETAIL_SUCCESS,
+  SET_LOADER
 } from "./constant";
 
 
@@ -79,7 +80,12 @@ export const updateUser = (data) => {
       payload: data
   };
 };
-
+export const setLoader = (data) => {
+  return {
+      type: SET_LOADER,
+      payload: data
+  };
+};
 export const fetchRegistrationDropdown = () => { 
   return {
       type: REGISTRATION_FORM_DROPDOWNS, 

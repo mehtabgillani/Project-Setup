@@ -10,3 +10,4 @@ export const GET_USER = 'get_user';
 export const GET_USER_SUCCESS = 'get_user_success'; 
 export const UPDATE_ACTION = 'update_action';
 export const GET_USER_DETAIL_SUCCESS = 'get_user_detail_success'; 
+export const SET_LOADER='set_loader'

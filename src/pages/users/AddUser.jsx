@@ -20,6 +20,7 @@ import {
   getUser,
   getUserSuccess,
   updateUser,
+  setLoader
 } from "../../store/User/actions";
 
 import EyeIcon from "mdi-react/EyeIcon";
@@ -31,7 +32,8 @@ function AddUser() {
   );
   const userDetail = useSelector((state) => state.Users.userDetail);
   const updateAction = useSelector((state) => state.Users.updateAction);
-  const [loader, setLoader] = useState(false);
+  // const [loader, setLoader] = useState(false);
+  const loader = useSelector((state) => state.Users.loader);
   useEffect(() => {
     dispatch(fetchRegistrationDropdown());
     console.log("update action", updateAction);
@@ -74,8 +76,8 @@ function AddUser() {
   const AddUserSchema = Yup.object().shape({
     isUpdate: Yup.boolean().default(updateAction.action),
     name: Yup.string()
-      .required("Name is required")
-      .matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid Name!"),
+      .required("Username is required")
+      .matches(/^[^-\s]{1,40}$/, "Invalid username!"),
     email: Yup.mixed().when(["isUpdate"], {
       is: true,
       then: Yup.mixed(),
@@ -116,6 +118,7 @@ function AddUser() {
     validationSchema: AddUserSchema,
     onSubmit: async (values) => {
       console.log("values of add users form", values);
+      dispatch(setLoader(true));
       if (updateAction.action == false) {
         await dispatch(
           addNewUser({
@@ -204,7 +207,7 @@ function AddUser() {
                                   label="name"
                                   value={addUserFormik.values.name}
                                   onChange={addUserFormik.handleChange}
-                                  placeholder="Enter name"
+                                  placeholder="Enter username"
                                   type="text"
                                 />
                               </div>
@@ -650,7 +653,7 @@ function AddUser() {
                                     type="submit"
                                     color="primary"
                                     onClick={() => {
-                                      setLoader(true);
+                                    
                                       addUserFormik.handleSubmit();
                                     }}
                                   >
@@ -662,7 +665,7 @@ function AddUser() {
                                     type="submit"
                                     color="primary"
                                     onClick={() => {
-                                      setLoader(true);
+                                    
                                       addUserFormik.handleSubmit();
                                     }}
                                   >

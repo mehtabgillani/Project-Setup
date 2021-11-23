@@ -16,6 +16,7 @@ import {
   fetchRegistrationDropdownSuccess,
   getUserSuccess,
   getUserDetailSuccess,
+  setLoader
 } from "./actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -83,10 +84,12 @@ function* addUser({ payload }) {
         Authorization: `Bearer ${token}`,
       },
     });
+    yield put(setLoader(false));
     toast.success("User created Successfully");
     yield put(push("/user/user"));
   } catch (error) {
     yield sagaErrorHandler(error.response);
+    yield put(setLoader(false));
   }
 }
 
@@ -115,10 +118,12 @@ function* editUser({ payload }) {
       data,
       headers
     );
+    yield put(setLoader(false));
     toast.success("User Updated Successfully");
     yield put(push("/user/user"));
   } catch (error) {
     yield sagaErrorHandler(error.response);
+    yield put(setLoader(false));
   }
 }
 
