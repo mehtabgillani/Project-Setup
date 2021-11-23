@@ -23,7 +23,7 @@ const ProfileTabs = ({userDetail}) => {
                     {userDetail.stiTested ? 'yes': 'Rather not to say'}
                       </span></li>
                     <li class="list-group-item">Sexual Orientation <span class="float-right"> {userDetail.sexual_orientation && userDetail.sexual_orientation.name ? userDetail.sexual_orientation.name : ''}</span></li>
-                    <li class="list-group-item">Relationship Status <span class="badge float-right">{userDetail.relationship_status && userDetail.relationship_status.name ? userDetail.relationship_status.name : ''}</span></li>
+                    <li class="list-group-item">Relationship Status <span class="float-right">{userDetail.relationship_status && userDetail.relationship_status.name ? userDetail.relationship_status.name : ''}</span></li>
                   </ul>
                 </Col>
                 <Col md={6} lg={6} xl={6}>
