@@ -10,9 +10,22 @@ import {
 import ProfileMain from './components/ProfileMain';   
 import AboutProfile from './components/AboutProfile';   
 import ProfileTabs from './components/ProfileTabs';
-
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, Link } from "react-router-dom";
+import {
+  getUser
+} from "../../store/User/actions";
 function ViewUser() {
-  
+  const userDetail = useSelector((state) => state.Users.userData);
+  const location = useLocation();
+  const dispatch=useDispatch();
+  useEffect(() => {
+    if (location.state !== undefined) {
+      if ("userId" in location.state) {
+        dispatch(getUser(location.state.userId));
+      }
+    }
+  }, []);
   return (
     <React.Fragment>
       <Container fluid>
@@ -36,11 +49,11 @@ function ViewUser() {
                 <Row>
                   <Col md={12} lg={12} xl={4}>
                     <Row>
-                      <ProfileMain />  
-                      <AboutProfile />  
+                      <ProfileMain userDetail={userDetail} />  
+                      <AboutProfile userDetail={userDetail} />  
                     </Row>
                   </Col>
-                  <ProfileTabs />
+                  <ProfileTabs userDetail={userDetail}/>
                 </Row>
               </div> 
             </> 

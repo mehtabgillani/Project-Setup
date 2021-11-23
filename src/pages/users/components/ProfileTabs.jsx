@@ -4,7 +4,7 @@ import {
 } from 'reactstrap'; 
 
 const Ava = `${process.env.PUBLIC_URL}/img/12.png`;
-const ProfileTabs = () => {
+const ProfileTabs = ({userDetail}) => {
     
   return (
     <Col md={12} lg={12} xl={8}>
@@ -19,16 +19,21 @@ const ProfileTabs = () => {
                 <Col md={6} lg={6} xl={6}>
 
                   <ul class="list-group">
-                    <li class="list-group-item">STI's & STD's <span class="float-right">Yes</span></li>
-                    <li class="list-group-item">Sexual Orientation <span class="float-right">Straight</span></li>
-                    <li class="list-group-item">Relationship Status <span class="badge float-right">Single</span></li>
+                    <li class="list-group-item">STI's & STD's <span class="float-right">
+                    {userDetail.stiTested ? 'yes': 'Rather not to say'}
+                      </span></li>
+                    <li class="list-group-item">Sexual Orientation <span class="float-right"> {userDetail.sexual_orientation && userDetail.sexual_orientation.name ? userDetail.sexual_orientation.name : ''}</span></li>
+                    <li class="list-group-item">Relationship Status <span class="badge float-right">{userDetail.relationship_status && userDetail.relationship_status.name ? userDetail.relationship_status.name : ''}</span></li>
                   </ul>
                 </Col>
                 <Col md={6} lg={6} xl={6}>
                   <ul class="list-group">
-                    <li class="list-group-item">Build Is <span class="float-right">Average</span></li>
-                    <li class="list-group-item">Ethnicity <span class="float-right">white</span></li>
-                    <li class="list-group-item">Habits<span class="float-right">Drink</span></li> 
+                    <li class="list-group-item">Build Is <span class="float-right">{userDetail.body_build && userDetail.body_build.name ? userDetail.body_build.name : ''}</span></li>
+                    <li class="list-group-item">Ethnicity <span class="float-right">{userDetail.ethni && userDetail.ethni.name ? userDetail.ethni.name : ''}</span></li>
+                    <li class="list-group-item">Habits<span class="float-right">{userDetail.drink ? 'drink,' : ''}
+                    {userDetail.weed ? 'Weed,' : ''}
+                    {userDetail.smoke ? 'Smoke' : ''}
+                    </span></li> 
                   </ul>
                 </Col>
                 <Col md={6} lg={6} xl={6}>

@@ -16,6 +16,7 @@ import {
   changeUserActivePage,
   deleteUser,
   updateAction,
+  getUser
 } from "../../store/User/actions";
 import Delete from "../../assets/icons/delete.svg";
 // import Edit from "../../assets/icons/edit.svg"; 
@@ -47,6 +48,12 @@ function UserList() {
   const routeChange = () => {
     let path = `/add-user`;
     history.push(path);
+  };
+  const edit = (id) => {
+    history.push({
+      pathname: "/view-user-details/" + id,
+      state: { userId: id },
+    });
   };
   return (
     <React.Fragment>
@@ -153,6 +160,9 @@ function UserList() {
                                 id={`detail_${id}`}
                                 style={{ marginRight: "5px" }}
                                 onClick={() => {
+                                  edit(user.id);
+                                // history.push('/view-user-details')
+                                // dispatch(getUser(user.id));
                                 
                                 }}
                                 >  
@@ -181,7 +191,7 @@ function UserList() {
                                 </span>
                                 
                               </span>  
-                              
+
                               <span className="d-inline-block"
                                 id={`delete_${id}`}
                                 style={{ marginRight: "5px" }}
