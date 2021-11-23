@@ -17,7 +17,7 @@ const ProfileMain = ({userDetail}) => (
             <img src={userDetail.UserPhotos && userDetail.UserPhotos[0] ? userDetail.UserPhotos[0].url : Ava } alt="avatar" />
           </div>
           <div className="profile__data">
-            <p className="profile__name">{userDetail.name ? userDetail.name: ''}</p>
+            <p className="profile__name">{userDetail.username ? userDetail.username: ''}</p>
             <p className="profile__contact"> 
               <MailOutlineIcon className="profileIcon"/> 
               {userDetail.email ? userDetail.email: ''}
