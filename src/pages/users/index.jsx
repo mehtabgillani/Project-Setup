@@ -126,7 +126,7 @@ function UserList() {
                             <td>
                               {moment(user.birthDate).format("MMM Do YYYY")}
                             </td>
-                            <td>
+                            <td style={{display:'flex'}}>
                               <span
                                 id={`delete_${id}`}
                                 style={{ marginRight: "5px" }}
@@ -147,6 +147,28 @@ function UserList() {
                                 toggle={() => toggleForToolObj1(`delete_${id}`)}
                               >
                                 Delete User
+                              </Tooltip>
+
+                              <span
+                                id={`Edit_${id}`}
+                                style={{ marginRight: "5px" }}
+                                onClick={() => {
+                                  // setDeleteModal(true);
+                                  setUserId(user.id);
+                                }}
+                              >
+                                <img style={{ height: "22px" }} src={Delete} />
+                              </span>
+
+                              <Tooltip
+                                placement="top"
+                                isOpen={
+                                  tooltipOpenObj[`Edit_${id}`] ? true : false
+                                }
+                                target={`Edit_${id}`}
+                                toggle={() => toggleForToolObj1(`Edit_${id}`)}
+                              >
+                                Edit User
                               </Tooltip>
                             </td>
                           </tr>

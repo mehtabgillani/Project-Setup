@@ -5,8 +5,24 @@ import {
   DELETE_USER,
   REGISTRATION_FORM_DROPDOWNS,
   REGISTRATION_FORM_DROPDOWNS_SUCCESS,
-  ADD_USER
+  ADD_USER,
+  EDIT_USER,
+  GET_USER,
+  GET_USER_SUCCESS,
 } from "./constant";
+
+export const getUser = (data) => {
+  return {
+    type: GET_USER,
+    payload: data,
+  };
+};
+export const getUserSuccess = (data) => {
+  return {
+    type: GET_USER_SUCCESS,
+    payload: data,
+  };
+};
 
 export const getUsersList = (data) => {
   return {

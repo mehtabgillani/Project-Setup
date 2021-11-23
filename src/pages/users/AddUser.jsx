@@ -12,7 +12,8 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux"; 
 import { 
   addNewUser,
-  fetchRegistrationDropdown
+  fetchRegistrationDropdown,
+  getUser
 } from "../../store/User/actions";  
  
 import EyeIcon from "mdi-react/EyeIcon"; 
@@ -20,11 +21,11 @@ import EyeIcon from "mdi-react/EyeIcon";
 function AddUser() {
   const dispatch = useDispatch();
   const dropdownOptions = useSelector((state) => state.Users.registrationDropdownValues);
-  // const [genderData, setGender] = useState([]);
-  // console.log("ITL", dropdownOptions.gender)
+  const userDetail = useSelector((state) => state.Users.userDetail);
   useEffect(() => {
     dispatch(fetchRegistrationDropdown());
-    // setGender(dropdownOptions.gender)
+    console.log("user detail in reducer",userDetail);
+    dispatch(getUser())
   }, []);
   const [showPassword, setShowPassword] = useState("password");
   const changePasswordState = () => {
@@ -36,7 +37,7 @@ function AddUser() {
   };
 
   const AddUserSchema = Yup.object().shape({
-    username: Yup.string().required("Username is required"),
+    name: Yup.string().required("name is required"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
@@ -50,33 +51,35 @@ function AddUser() {
     relationship: Yup.string().required("Relationship status is required"),
     buildIs: Yup.string().required("Build is required"),
     ethnicity: Yup.string().required("Ethnicity is required"),
-    // lookingFor: Yup.string().required("Looking to meet is required"), 
+    lookingFor: Yup.string().required("Looking to meet is required"), 
     // photo: Yup.string().required("Photo is required"), 
   });
   
   const addUserFormik = useFormik({
-    initialValues: {
-      username: "",
-      email: "",
-      password: "", 
-      number: "", 
-      birthdate: "", 
-      location: "", 
-      height: "", 
-      orientation: "", 
-      gender: "", 
-      relationship: "", 
-      buildIs: "", 
-      ethnicity: "", 
-      // lookingFor: "",  
-      // photo: "",  
-    },
+    // initialValues: {
+    //   name: "",
+    //   email: "",
+    //   password: "", 
+    //   number: "", 
+    //   birthdate: "", 
+    //   location: "", 
+    //   height: "", 
+    //   orientation: "", 
+    //   gender: "", 
+    //   relationship: "", 
+    //   buildIs: "", 
+    //   ethnicity: "", 
+    //   // lookingFor: "",  
+    //   // photo: "",  
+    // },
+    enableReinitialize: true,
+    initialValues: userDetail,
     validationSchema: AddUserSchema,
     onSubmit: async (values) => {
       console.log("values of add users form", values);
       await dispatch(
         addNewUser({
-          username: values.username,
+          name: values.name,
           email: values.email,
           password: values.password,
           number: values.number,
@@ -129,33 +132,33 @@ function AddUser() {
                       <Row>
                         <Col lg="3">
                           <div className="form__form-group">
-                            <span className="form__form-group-label">Pick a unique username</span>
+                            <span className="form__form-group-label">User Name</span>
                             <div className="form__form-group-field"> 
                               <Input
                                 className="input-without-border-radius"
-                                name="username"
-                                label="Username"
-                                value={addUserFormik.values.username}
+                                name="name"
+                                label="name"
+                                value={addUserFormik.values.name}
                                 onChange={addUserFormik.handleChange}
-                                placeholder="Enter Username"
+                                placeholder="Enter name"
                                 type="text"
                               />
                             </div>
-                            {addUserFormik.touched.username && addUserFormik.errors.username ? (
+                            {addUserFormik.touched.name && addUserFormik.errors.name ? (
                               <div className="text-start mb-1 text-danger">
-                                {addUserFormik.errors.username}
+                                {addUserFormik.errors.name}
                               </div>
                             ) : null}
                           </div>
                         </Col> 
                         <Col lg="3">
                           <div className="form__form-group">
-                            <span className="form__form-group-label">What is your email address? </span>
+                            <span className="form__form-group-label">Email </span>
                             <div className="form__form-group-field"> 
                               <Input
                                 className="input-without-border-radius"
                                 name="email"
-                                label="Email"
+                                label="email"
                                 value={addUserFormik.values.email}
                                 onChange={addUserFormik.handleChange}
                                 placeholder="Enter Email"
@@ -203,7 +206,7 @@ function AddUser() {
                         
                         <Col lg="3">
                           <div className="form__form-group">
-                            <span className="form__form-group-label">What is your phone number?</span>
+                            <span className="form__form-group-label"> Phone Number?</span>
                             <div className="form__form-group-field"> 
                               <Input
                                 className="input-without-border-radius"
@@ -212,7 +215,7 @@ function AddUser() {
                                 value={addUserFormik.values.number}
                                 onChange={addUserFormik.handleChange}
                                 placeholder="Enter Number"
-                                type="number"
+                                type="text"
                               />
                             </div>
                             {addUserFormik.touched.number && addUserFormik.errors.number ? (
@@ -243,7 +246,7 @@ function AddUser() {
                             ) : null}
                           </div>
                         </Col> 
-                        <Col lg="3">
+                        {/* <Col lg="3">
                           <div className="form__form-group">
                             <span className="form__form-group-label">Where are you located?</span>
                             <div className="form__form-group-field"> 
@@ -263,7 +266,7 @@ function AddUser() {
                               </div>
                             ) : null}
                           </div>
-                        </Col> 
+                        </Col>  */}
                         <Col lg="3"> 
                           <div className="form__form-group">
                             <span className="form__form-group-label">How tall are you?</span>
@@ -274,10 +277,10 @@ function AddUser() {
                                 value={addUserFormik.values.height}
                                 onChange={addUserFormik.handleChange}
                               > 
-                                <option value="average">Average</option>
-                                <option value="short">Short</option>
-                                <option value="funSized">Fun sized</option>
-                                <option value="tall">Tall</option> 
+                                <option value="Average">Average</option>
+                                <option value="Short">Short</option>
+                                <option value="FunSized">Fun sized</option>
+                                <option value="Tall">Tall</option> 
                               </select>
                             </div>
                             {addUserFormik.touched.height && addUserFormik.errors.height ? (
@@ -427,7 +430,7 @@ function AddUser() {
                             ) : null}
                           </div>
                         </Col>
-                        {/* <Col lg="3"> 
+                        <Col lg="3"> 
                           <div className="form__form-group">
                             <span className="form__form-group-label">Who are you looking to meet? </span>
                             <div className="form__form-group-field custom_select"> 
@@ -454,7 +457,7 @@ function AddUser() {
                               </div>
                             ) : null}
                           </div>
-                        </Col> */}
+                        </Col>
                         {/* <Col lg="3">
                         <FormGroup>
                             <Label for="ad">Add photo</Label>
