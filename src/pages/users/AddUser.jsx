@@ -72,7 +72,7 @@ function AddUser() {
   };
 
   const AddUserSchema = Yup.object().shape({
-    name: Yup.string().required("name is required").matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid Name!"),
+    name: Yup.string().required("Name is required").matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid Name!"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
