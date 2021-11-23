@@ -93,7 +93,7 @@ function AddUser() {
         .required("Password is required")
         .matches(
           /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          "Password must contain 8 characters,  One uppercase, One lowercase, One number and one special case character"
+          "Must contain 8 characters,  One uppercase, One lowercase, One number and one special case character"
         ),
     }),
     number: Yup.string()
@@ -198,7 +198,7 @@ function AddUser() {
                           <Col lg="3">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
-                                User Name
+                                Username
                               </span>
                               <div className="form__form-group-field">
                                 <Input
@@ -232,7 +232,7 @@ function AddUser() {
                                     label="email"
                                     value={addUserFormik.values.email}
                                     onChange={addUserFormik.handleChange}
-                                    placeholder="Enter Email"
+                                    placeholder="Enter email"
                                     type="text"
                                     disabled
                                   />
@@ -258,7 +258,7 @@ function AddUser() {
                                     label="email"
                                     value={addUserFormik.values.email}
                                     onChange={addUserFormik.handleChange}
-                                    placeholder="Enter Email"
+                                    placeholder="Enter email"
                                     type="text"
                                   />
                                 </div>
@@ -272,31 +272,33 @@ function AddUser() {
                             </Col>
                           )}
                           {updateAction.action ? (
-                            <Col lg="3">
-                              <div className="form__form-group">
-                                <span className="form__form-group-label">
-                                  Password
-                                </span>
-                                <div className="form__form-group-field">
-                                  <Input
-                                    className="input-without-border-radius"
-                                    name="password"
-                                    label="password"
-                                    value={addUserFormik.values.password}
-                                    onChange={addUserFormik.handleChange}
-                                    placeholder="Enter Password"
-                                    type="text"
-                                    disabled
-                                  />
-                                </div>
-                                {addUserFormik.touched.password &&
-                                addUserFormik.errors.password ? (
-                                  <div className="text-start mb-1 text-danger">
-                                    {addUserFormik.errors.password}
-                                  </div>
-                                ) : null}
-                              </div>
-                            </Col>
+                            // <Col lg="3">
+                            //   <div className="form__form-group">
+                            //     <span className="form__form-group-label">
+                            //       Password
+                            //     </span>
+                            //     <div className="form__form-group-field">
+                            //       <Input
+                            //         className="input-without-border-radius"
+                            //         name="password"
+                            //         label="password"
+                            //         value={addUserFormik.values.password}
+                            //         onChange={addUserFormik.handleChange}
+                            //         placeholder="Enter password"
+                            //         type="text"
+                            //         disabled
+                            //       />
+                            //     </div>
+                            //     {addUserFormik.touched.password &&
+                            //     addUserFormik.errors.password ? (
+                            //       <div className="text-start mb-1 text-danger">
+                            //         {addUserFormik.errors.password}
+                            //       </div>
+                            //     ) : null}
+                            //   </div>
+                            // </Col>
+                            <>
+                            </>
                           ) : (
                             <Col lg="3">
                               <div className="form__form-group">
@@ -310,7 +312,7 @@ function AddUser() {
                                     label="password"
                                     value={addUserFormik.values.password}
                                     onChange={addUserFormik.handleChange}
-                                    placeholder="Enter Password"
+                                    placeholder="Enter password"
                                     type="text"
                                   />
                                 </div>
@@ -328,16 +330,16 @@ function AddUser() {
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 {" "}
-                                Phone Number?
+                                Phone number
                               </span>
                               <div className="form__form-group-field">
                                 <Input
                                   className="input-without-border-radius"
                                   name="number"
-                                  label="Phone Number"
+                                  label="Phone number"
                                   value={addUserFormik.values.number}
                                   onChange={addUserFormik.handleChange}
-                                  placeholder="Enter Number"
+                                  placeholder="Enter phone number"
                                   type="text"
                                 />
                               </div>

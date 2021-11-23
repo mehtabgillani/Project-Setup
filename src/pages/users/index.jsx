@@ -131,7 +131,7 @@ function UserList() {
                   >
                     <thead className="">
                       <tr>
-                        <th>User Name</th>
+                        <th>Username</th>
                         <th>Email</th>
                         <th>Age</th>
                         <th>Phone Number</th>
@@ -208,8 +208,8 @@ function UserList() {
                                   <DeleteIcon/> 
                                 </span>
                               </span>
-                              
-                              <Tooltip
+                              <span className="tooltip_top">
+                              <Tooltip id="tooltip_top"
                                 placement="top"
                                 isOpen={
                                   tooltipOpenObj[`delete_${id}`] ? true : false
@@ -219,7 +219,7 @@ function UserList() {
                               >
                                 Delete User
                               </Tooltip>
-                              <Tooltip
+                              <Tooltip id="tooltip_top_view"
                                 placement="top"
                                 isOpen={
                                   tooltipOpenObj[`detail_${id}`] ? true : false
@@ -230,7 +230,7 @@ function UserList() {
                                 User Detail
                               </Tooltip>
                            
-                              <Tooltip
+                              <Tooltip id="tooltip_top_edit"
                                 placement="top"
                                 isOpen={
                                   tooltipOpenObj[`Edit_${id}`] ? true : false
@@ -240,6 +240,7 @@ function UserList() {
                               >
                                 Edit User
                               </Tooltip>
+                              </span>
                             </td>
                           </tr>
                         ))}
