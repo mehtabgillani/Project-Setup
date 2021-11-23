@@ -97,7 +97,7 @@ function* editUser({ payload }) {
       lookingToMeets: [payload.lookingFor],
       // "photo": payload.photo,
     };
-    const response = yield axios.post(
+    const response = yield axios.patch(
       `/admin/users/${payload.id}`,
       data,
       headers
