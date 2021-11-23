@@ -45,11 +45,11 @@ const AlertComponent = ({
         >
           <CardBody className="panel__body">
             {refresh ? <div className="panel__refresh"><LoadingIcon /></div> : ''}
-            <div className="panel__btns">
+            {/* <div className="panel__btns">
               <button className="panel__btn" type="button" onClick={toggleCollapse}><MinusIcon /></button>
               <button className="panel__btn" type="button" onClick={onRefresh}><AutorenewIcon /></button>
               <button className="panel__btn" type="button" onClick={onDismiss}><CloseIcon /></button>
-            </div>
+            </div> */}
             <div className="panel__title">
               <h5 className="bold-text">
                 {icon ? <span className={`panel__icon lnr lnr-${icon}`} /> : ''}
