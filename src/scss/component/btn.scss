@@ -188,17 +188,21 @@
     border-color: $color-blue;
 
     &:before {
-      background-color: $color-blue-hover;
+      // background-color: $color-blue-hover;
+      background-color: #6751ca !important;
     }
 
     &:hover, &:focus, &:active, &:active:focus {
-      border-color: $color-blue-hover;
+      // border-color: $color-blue-hover;
+      border-color: #6751ca !important;
     }
   }
 
   &.btn-outline-primary {
     color: $color-blue;
-    border-color: $color-blue;
+    // border-color: $color-blue;
+    border-color: #6751ca !important;
+    
 
     p {
       color: $color-blue;
@@ -209,7 +213,8 @@
     }
 
     &:before {
-      background-color: $color-blue;
+      // background-color: $color-blue;
+      background-color: #6751ca !important;
     }
   }
 
