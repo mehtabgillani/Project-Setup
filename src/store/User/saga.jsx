@@ -122,10 +122,13 @@ function* fetchDropdownOptions({ payload }) {
 
 function* fetchGetUser({ payload }) {
   try {
+    console.log("i am in fetch get user api")
     const token = yield select(makeSelectAuthToken());
     const headers = { headers: { Authorization: `Bearer ${token}` } };
     const response = yield axios.get(`/admin/users/${payload}`, headers);
     const userDetail = response.data.data.user;
+    console.log(" response.data.data.user", response.data.data.user)
+    
     let data = {
       status: "success",
       data: {
@@ -134,22 +137,17 @@ function* fetchGetUser({ payload }) {
         password: userDetail.password ? userDetail.password : "",
         number: userDetail.phoneNumber ? userDetail.phoneNumber : "",
         birthdate: userDetail.birthDate ? userDetail.birthDate : "",
-        location: userDetail.location ? userDetail.location : "",
-        height: userDetail.height ? userDetail.height : "average",
+        height: userDetail.height ? userDetail.height : "Average",
         orientation: userDetail.sexual_orientation.id
           ? userDetail.sexual_orientation.id
           : 1,
         gender: userDetail.sex.id ? userDetail.sex.id : 10,
-        relationship: userDetail.relationship_status.id
-          ? userDetail.relationship_status.id
-          : 15,
+        relationship: userDetail.relationship_status.id? userDetail.relationship_status.id: 15,
         buildIs: userDetail.body_build.id ? userDetail.body_build.id : 21,
         ethnicity: userDetail.ethni.id ? userDetail.ethni.id : 27,
-        lookingFor: userDetail.LookingToMeets[0].id
-          ? userDetail.LookingToMeets[0].id
-          : 2,
-      },
+        lookingFor:  userDetail.LookingToMeets[0] && userDetail.LookingToMeets[0].id? userDetail.LookingToMeets[0].id: 2},
     };
+    console.log("data that we are going to put in reducer",data)
 
     yield put(getUserSuccess(data));
   } catch (error) {

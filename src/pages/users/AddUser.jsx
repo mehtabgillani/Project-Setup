@@ -222,30 +222,20 @@ function AddUser() {
                             </div>
                           </Col>
                           <Col lg="3">
-                            <div className="form__form-group">
+                          <div className="form__form-group">
                               <span className="form__form-group-label">
-                                Pick a strong password
+                                Password
                               </span>
                               <div className="form__form-group-field">
                                 <Input
                                   className="input-without-border-radius"
                                   name="password"
-                                  label="Password"
+                                  label="password"
                                   value={addUserFormik.values.password}
                                   onChange={addUserFormik.handleChange}
                                   placeholder="Enter Password"
-                                  type={showPassword}
+                                  type="text"
                                 />
-
-                                <button
-                                  type="button"
-                                  className={`form__form-group-button${
-                                    showPassword == "text" ? " active" : ""
-                                  }`}
-                                  onClick={changePasswordState}
-                                >
-                                  <EyeIcon />
-                                </button>
                               </div>
                               {addUserFormik.touched.password &&
                               addUserFormik.errors.password ? (
@@ -254,6 +244,7 @@ function AddUser() {
                                 </div>
                               ) : null}
                             </div>
+
                           </Col>
 
                           <Col lg="3">

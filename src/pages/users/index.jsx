@@ -131,8 +131,8 @@ function UserList() {
                         users.usersList.data.users.map((user, id) => (
                           <tr>
                             <td>{user.username}</td>
-                            {user.email && user.email.length > 23 ? (
-                              <td>{user.email.substring(0, 23)}....</td>
+                            {user.email && user.email.length > 17 ? (
+                              <td>{user.email.substring(0, 17)}....</td>
                             ) : (
                               <td>{user.email}</td>
                             )}
