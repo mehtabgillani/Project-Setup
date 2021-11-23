@@ -93,11 +93,11 @@ function AddUser() {
         .required("Password is required")
         .matches(
           /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-          "Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character"
+          "Password must contain 8 characters,  One uppercase, One lowercase, One number and one special case character"
         ),
     }),
     number: Yup.string()
-      .required("Phone Number is required")
+      .required("Phone number is required")
       .min(10, "Phone number can not be less than 10 digits")
       .max(17, "Phone number can not be more than 17 digits"),
     birthdate: Yup.string().required("Birthday is required"),
