@@ -15,6 +15,7 @@ import {
   changeUserActivePage,
   fetchRegistrationDropdownSuccess,
   getUserSuccess,
+  getUserDetailSuccess,
 } from "./actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -150,6 +151,7 @@ function* fetchGetUser({ payload }) {
     console.log("data that we are going to put in reducer",data)
 
     yield put(getUserSuccess(data));
+    yield put(getUserDetailSuccess(userDetail));
   } catch (error) {
     yield sagaErrorHandler(error.response);
   }

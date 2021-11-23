@@ -5,6 +5,7 @@ import {
   REGISTRATION_FORM_DROPDOWNS_SUCCESS,
   GET_USER_SUCCESS,
   UPDATE_ACTION,
+  GET_USER_DETAIL_SUCCESS
 } from "./constant";
 
 const initialState = {
@@ -30,7 +31,8 @@ const initialState = {
   updateAction:{
     action:false,
     id:'',
-  } 
+  } ,
+  userData:"",
 };
 
 const Users = produce((state, action) => {
@@ -47,6 +49,9 @@ const Users = produce((state, action) => {
     case GET_USER_SUCCESS:
       state.userDetail =action.payload.data;
       break;
+    case GET_USER_DETAIL_SUCCESS:
+       state.userData =action.payload;
+       break;
     case UPDATE_ACTION:
       state.updateAction =action.payload;
       break;

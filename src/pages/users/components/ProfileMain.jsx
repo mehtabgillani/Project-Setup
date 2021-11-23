@@ -25,26 +25,27 @@ const ProfileMain = ({userDetail}) => (
             </p>
             <p className="profile__contact" dir="ltr">
               <CallOutlineIcon className="profileIcon"/>  
-              {userDetail.number ? userDetail.number: ''}
+              {userDetail.phoneNumber ? userDetail.phoneNumber: ''}
             </p> 
             <p className="profile__work">
               <CakeVariantIcon className="profileIcon"/> 
-              {userDetail.birthdate ? userDetail.birthdate: ''}
+              {userDetail.birthDate ? userDetail.birthDate: ''}
             </p>
           </div>
         </div>
         <div className="profile__stats">
           <div className="profile__stat">
             <p className="profile__stat-number">
-            {userDetail.gender ? userDetail.gender: ''}</p>
+            {userDetail.sex && userDetail.sex.name ? userDetail.sex.name: ''}
+            </p>
             <p className="profile__stat-title">Gender</p>
           </div>
           <div className="profile__stat">
-            <p className="profile__stat-number">5.7</p>
+            <p className="profile__stat-number"> {userDetail.height ? userDetail.height: ''}</p> 
             <p className="profile__stat-title">Height</p>
           </div>
           <div className="profile__stat">
-            <p className="profile__stat-number">Yes</p>
+            <p className="profile__stat-number">{userDetail.vaccinated == null ? 'Rather not to say': userDetail.vaccinated}</p>
             <p className="profile__stat-title">Vaccinated</p>
           </div>   
         </div>

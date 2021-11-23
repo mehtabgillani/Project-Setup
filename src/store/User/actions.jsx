@@ -9,7 +9,8 @@ import {
   EDIT_USER,
   GET_USER,
   GET_USER_SUCCESS,
-  UPDATE_ACTION
+  UPDATE_ACTION,
+  GET_USER_DETAIL_SUCCESS,
 } from "./constant";
 
 
@@ -32,7 +33,12 @@ export const getUserSuccess = (data) => {
     payload: data,
   };
 };
-
+export const getUserDetailSuccess = (data) => {
+  return {
+    type: GET_USER_DETAIL_SUCCESS,
+    payload: data,
+  };
+};
 export const getUsersList = (data) => {
   return {
     type: GET_USERS_LIST,

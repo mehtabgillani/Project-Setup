@@ -13,7 +13,7 @@ import ProfileTabs from './components/ProfileTabs';
 import { useDispatch, useSelector } from "react-redux";
 
 function ViewUser() {
-  const userDetail = useSelector((state) => state.Users.userDetail);
+  const userDetail = useSelector((state) => state.Users.userData);
   return (
     <React.Fragment>
       <Container fluid>
