@@ -10,7 +10,6 @@ const Ava = `${process.env.PUBLIC_URL}/img/12.png`;
 
 const ProfileMain = ({userDetail}) => (
   <Col md={12} lg={12} xl={12}>
-    <p onClick={()=>{console.log("user detail",userDetail)}}> heyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</p>
     <Card>
       <CardBody className="profile__card">
         <div className="profile__information">

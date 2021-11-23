@@ -48,7 +48,7 @@ export default () => (
       {/* //Admin Panel Routes */}
       <Route path="/user" component={User} />
       <Route path="/add-user" component={AddUser} />
-      <Route path="/view-user-details" component={ViewUser} />
+      <Route path="/view-user-details/:id" component={ViewUser} />
     </div>
   </div>
 );

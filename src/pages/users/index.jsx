@@ -49,6 +49,12 @@ function UserList() {
     let path = `/add-user`;
     history.push(path);
   };
+  const edit = (id) => {
+    history.push({
+      pathname: "/view-user-details/" + id,
+      state: { userId: id },
+    });
+  };
   return (
     <React.Fragment>
       <Container fluid>
@@ -154,8 +160,9 @@ function UserList() {
                                 id={`detail_${id}`}
                                 style={{ marginRight: "5px" }}
                                 onClick={() => {
-                                history.push('/view-user-details')
-                                dispatch(getUser(user.id));
+                                  edit(user.id);
+                                // history.push('/view-user-details')
+                                // dispatch(getUser(user.id));
                                 
                                 }}
                                 >  
