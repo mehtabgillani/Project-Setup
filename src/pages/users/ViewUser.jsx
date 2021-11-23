@@ -7,6 +7,9 @@ import {
   CardBody,
   Form, Input, Button, FormGroup, Label
 } from "reactstrap";  
+import ProfileMain from './components/ProfileMain';   
+import AboutProfile from './components/AboutProfile';   
+import ProfileTabs from './components/ProfileTabs';
 
 function ViewUser() {
   
@@ -19,7 +22,7 @@ function ViewUser() {
               <h4
                 className="page-title mb-3" 
               >
-                User
+                User Detail
               </h4>
             </Col>
           </Row>
@@ -27,18 +30,20 @@ function ViewUser() {
         
 
         <Row>
-          <Col lg="12">
-            <Card>
-              <CardBody>
-                <> 
-                  <Row className="justify-content-center mt-3">
-                    <Col lg="12">
-                    
-                    </Col>
-                  </Row>
-                </>
-              </CardBody>
-            </Card>
+          <Col lg="12"> 
+            <>  
+              <div className="profile">
+                <Row>
+                  <Col md={12} lg={12} xl={4}>
+                    <Row>
+                      <ProfileMain />  
+                      <AboutProfile />  
+                    </Row>
+                  </Col>
+                  <ProfileTabs />
+                </Row>
+              </div> 
+            </> 
           </Col>
         </Row>
       </Container>
