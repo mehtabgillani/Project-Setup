@@ -52,12 +52,12 @@ function UserList() {
               <h4
                 className="page-title mb-3"
                 onClick={() => {
-                  dispatch(
-                    updateAction({
-                      action: false,
-                      id: "",
-                    })
-                  );
+                  // dispatch(
+                  //   updateAction({
+                  //     action: false,
+                  //     id: "",
+                  //   })
+                  // );
                 }}
               >
                 Users
@@ -68,7 +68,15 @@ function UserList() {
                 className="mb-3"
                 size="sm"
                 color="primary"
-                onClick={routeChange}
+                onClick={()=>{
+                  routeChange();
+                  dispatch(
+                    updateAction({
+                      action: false,
+                      id: "",
+                    })
+                  );
+                }}
               >
                 Add User
               </Button>

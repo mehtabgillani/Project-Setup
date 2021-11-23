@@ -26,6 +26,7 @@ export const getUser = (data) => {
   };
 };
 export const getUserSuccess = (data) => {
+  console.log("get user success is called")
   return {
     type: GET_USER_SUCCESS,
     payload: data,

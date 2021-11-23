@@ -45,6 +45,7 @@ const Users = produce((state, action) => {
       state.registrationDropdownValues = action.payload;
       break;
     case GET_USER_SUCCESS:
+      console.log("action.payload.data in reducer of get user success",action.payload.data)
       state.userDetail =action.payload.data;
       break;
     case UPDATE_ACTION:

@@ -30,10 +30,12 @@ function AddUser() {
     console.log("update action",updateAction);
     if(updateAction.action == true)
     {
+      console.log("i am in update action of it")
       dispatch(getUser(updateAction.id))
     }
     else if(updateAction.action == false)
     {
+
       dispatch(getUserSuccess (
         {
           status: "success",
@@ -50,10 +52,9 @@ function AddUser() {
             relationship: 15,
             buildIs: 21,
             ethnicity: 27,
-            lookingFor: 2,
+            lookingFor: [2],
             // photo: "",
           }
-        
         }
       ))
     }
@@ -87,49 +88,78 @@ function AddUser() {
   });
   
   const addUserFormik = useFormik({
-    // initialValues: {
-    //   name: "",
-    //   email: "",
-    //   password: "", 
-    //   number: "", 
-    //   birthdate: "", 
-    //   location: "", 
-    //   height: "", 
-    //   orientation: "", 
-    //   gender: "", 
-    //   relationship: "", 
-    //   buildIs: "", 
-    //   ethnicity: "", 
-    //   // lookingFor: "",  
-    //   // photo: "",  
-    // },
     enableReinitialize: true,
     initialValues: userDetail,
     validationSchema: AddUserSchema,
     onSubmit: async (values) => {
       console.log("values of add users form", values);
-      await dispatch(
-        addNewUser({
-          name: values.name,
-          email: values.email,
-          password: values.password,
-          number: values.number,
-          birthdate: values.birthdate,
-          location: values.location,
-          height: values.height,
-          orientation: values.orientation,
-          gender: values.gender,
-          relationship: values.relationship,
-          buildIs: values.buildIs,
-          ethnicity: values.ethnicity,
-          // lookingFor: values.lookingFor, 
-          // photo: values.photo, 
-        })
-      );
+      if(updateAction.action == false){
+        await dispatch(
+          addNewUser({
+            name: values.name,
+            email: values.email,
+            password: values.password,
+            number: values.number,
+            birthdate: values.birthdate,
+            location: values.location,
+            height: values.height,
+            orientation: values.orientation,
+            gender: values.gender,
+            relationship: values.relationship,
+            buildIs: values.buildIs,
+            ethnicity: values.ethnicity,
+            lookingFor: values.lookingFor, 
+            // photo: values.photo, 
+          })
+        );
+      }
+      else if (updateAction.action == true){
+        // await dispatch(
+        //   updateUser({
+        //     name: values.name,
+        //     email: values.email,
+        //     password: values.password,
+        //     number: values.number,
+        //     birthdate: values.birthdate,
+        //     location: values.location,
+        //     height: values.height,
+        //     orientation: values.orientation,
+        //     gender: values.gender,
+        //     relationship: values.relationship,
+        //     buildIs: values.buildIs,
+        //     ethnicity: values.ethnicity,
+        //     lookingFor: values.lookingFor, 
+        //     // photo: values.photo, 
+        //   })
+        // );
+      }
+  
     },
   });
-  // const numbers = dropdownOptions.gender;
-  // console.log(numbers)
+
+  // if (updateAction) {
+  //   await dispatch(
+  //     updateAd({
+  //       id: adId,
+  //       name: values.name,
+  //       category: parseInt(values.category),
+  //       priority: parseInt(values.priority),
+  //       description: values.description,
+  //       ad: values.ad,
+  //       type: values.type,
+  //     })
+  //   );
+  // } else {
+  //   await dispatch(
+  //     addAd({
+  //       name: values.name,
+  //       category: parseInt(values.category),
+  //       priority: parseInt(values.priority),
+  //       description: values.description,
+  //       ad: values.ad,
+  //       type: values.type,
+  //     })
+  //   );
   return (
     <React.Fragment>
       <Container fluid>
@@ -518,9 +548,16 @@ function AddUser() {
                           <div className="form__form-group">
                             <div className="form__form-group form__form-group-field"></div>
                           </div> 
-                          <Button className="account__btn" type="submit" color="primary">
-                            Create
-                          </Button> 
+                          {updateAction.action == false ? 
+                           <Button className="account__btn" type="submit" color="primary">
+                           Create
+                         </Button> 
+                         :
+                         <Button className="account__btn" type="submit" color="primary">
+                         Update
+                       </Button> 
+                          }
+                         
                         </Col>
                       </Row>
                       

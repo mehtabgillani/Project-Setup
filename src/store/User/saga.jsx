@@ -81,7 +81,7 @@ function* fetchGetUser({ payload }) {
   try {  
     const token = yield select(makeSelectAuthToken());
     const headers = { headers: { Authorization: `Bearer ${token}`}};
-    const response = yield axios.get(`/admin/users/58`,headers); 
+    const response = yield axios.get(`/admin/users/${payload}`,headers); 
  console.log("response of get user",response.data.data.user)
  const userDetail =response.data.data.user;
  let data = {
