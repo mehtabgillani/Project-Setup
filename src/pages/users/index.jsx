@@ -127,7 +127,7 @@ function UserList() {
                   >
                     <thead className="">
                       <tr>
-                        <th>User Name</th>
+                        <th>Username</th>
                         <th>Email</th>
                         <th>Age</th>
                         <th>Phone Number</th>

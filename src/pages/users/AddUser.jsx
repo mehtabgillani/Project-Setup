@@ -72,16 +72,16 @@ function AddUser() {
   };
 
   const AddUserSchema = Yup.object().shape({
-    name: Yup.string().required("Name is required").matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid Name!"),
+    name: Yup.string().required("Usename is required").matches(/^[a-zA-Z0-9]+(?:[\s-][a-zA-Z0-9]+)*$/, "Invalid name!"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
     password:Yup.string().required('Password is required')
     .matches(
         /^(?=(?:.*[A-Z].*){1})(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        "Must Contain 8 Characters,  One Uppercase, One Lowercase, One Number and one special case Character"
+        "Must contain 8 characters,  One uppercase, One lowercase, One number and one special case character"
     ),
-    number: Yup.string().required("Phone Number is required").min(10,'Phone number can not be less than 10 digits').max(17,'Phone number can not be more than 17 digits'),
+    number: Yup.string().required("Phone number is required").min(10,'Phone number can not be less than 10 digits').max(17,'Phone number can not be more than 17 digits'),
     birthdate: Yup.string().required("Birthday is required"),
     // location: Yup.string().required("Location is required"),
     height: Yup.string().required("Height is required"),
@@ -180,7 +180,7 @@ function AddUser() {
                           <Col lg="3">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
-                                User Name
+                                Username
                               </span>
                               <div className="form__form-group-field">
                                 <Input
@@ -189,7 +189,7 @@ function AddUser() {
                                   label="name"
                                   value={addUserFormik.values.name}
                                   onChange={addUserFormik.handleChange}
-                                  placeholder="Enter name"
+                                  placeholder="Enter username"
                                   type="text"
                                 />
                               </div>
@@ -213,7 +213,7 @@ function AddUser() {
                                   label="email"
                                   value={addUserFormik.values.email}
                                   onChange={addUserFormik.handleChange}
-                                  placeholder="Enter Email"
+                                  placeholder="Enter email"
                                   type="text"
                                 />
                               </div>
@@ -237,7 +237,7 @@ function AddUser() {
                                   label="password"
                                   value={addUserFormik.values.password}
                                   onChange={addUserFormik.handleChange}
-                                  placeholder="Enter Password"
+                                  placeholder="Enter password"
                                   type="text"
                                 />
                               </div>
@@ -255,16 +255,16 @@ function AddUser() {
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 {" "}
-                                Phone Number?
+                                Phone number
                               </span>
                               <div className="form__form-group-field">
                                 <Input
                                   className="input-without-border-radius"
                                   name="number"
-                                  label="Phone Number"
+                                  label="Phone number"
                                   value={addUserFormik.values.number}
                                   onChange={addUserFormik.handleChange}
-                                  placeholder="Enter Number"
+                                  placeholder="Enter phone number"
                                   type="text"
                                 />
                               </div>
