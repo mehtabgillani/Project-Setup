@@ -636,7 +636,7 @@ function AddUser() {
                             <div className="form__form-group">
                               <div className="form__form-group form__form-group-field"></div>
                             </div>
-                            {loader == false ? (
+                            {loader == true ? (
                             <div className="d-flex justify-content-center account__btn" style={{height:'40px',paddingTop:'3px'}}>
                             <div className="spinner-border" role="status" style={{color:'whitesmoke'}}>
                               <span className="sr-only">Loading...</span>
