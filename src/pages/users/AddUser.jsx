@@ -23,7 +23,7 @@ import {
 } from "../../store/User/actions";
 
 import EyeIcon from "mdi-react/EyeIcon";
-
+import moment from 'moment';
 function AddUser() {
   const dispatch = useDispatch();
   const dropdownOptions = useSelector(
@@ -286,6 +286,7 @@ function AddUser() {
                                   onChange={addUserFormik.handleChange}
                                   placeholder="Enter Date"
                                   type="date"
+                                  max={moment().format("YYYY-MM-DD")}
                                 />
                               </div>
                               {addUserFormik.touched.birthdate &&

@@ -32,7 +32,7 @@ const ProfileTabs = () => {
                   </ul>
                 </Col>
                 <Col md={6} lg={6} xl={6}>
-                  <p className="profile__name mt-3">Partners on the app</p>
+                  <p className="profile__name mt-2">Partners on the app</p>
                   <div className="project-member">
                     <div className="project-member__avatar-wrap">
                       <img src={Ava} alt="" />
