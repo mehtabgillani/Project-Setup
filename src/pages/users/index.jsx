@@ -25,6 +25,7 @@ import DeleteIcon from 'mdi-react/DeleteIcon';
 import EyeIcon from 'mdi-react/EyeIcon';
 
 import DeleteModal from "./components/modal";
+import TableSearch from "./components/TableSearch";
 import moment from "moment";
 
 import { useHistory } from "react-router-dom";
@@ -34,6 +35,7 @@ function UserList() {
   const users = useSelector((state) => state.Users);
   const [tooltipOpenObj, setTooltipOpenObj] = useState({});
   const [deleteModal, setDeleteModal] = useState(false);
+  const [search, setSearch] = useState("");
   const [userId, setUserId] = useState("");
   const toggleForToolObj1 = (id) => {
     setTooltipOpenObj({
@@ -42,7 +44,11 @@ function UserList() {
     });
   };
   useEffect(() => {
-    dispatch(getUsersList({ page: users.userActivePage }));
+    dispatch(getUsersList({
+      page: users.userActivePage,
+      search: search
+    }));
+    console.log("search", search);
   }, [users.userActivePage]);
   const history = useHistory();
   const routeChange = () => {
@@ -80,7 +86,7 @@ function UserList() {
                 className="mb-3"
                 size="sm"
                 color="primary"
-                onClick={()=>{
+                onClick={() => {
                   routeChange();
                   dispatch(
                     updateAction({
@@ -106,185 +112,193 @@ function UserList() {
           default
           message="Are you sure you want to delete this user? "
         />
- { users.usersList.data &&
+        
+            <Row>
+              <Col lg="12">
+                <Card>
+                  <CardBody>
+                    <>
+                    <div className="listing_search">
+                      <div className="topbar__right-search">
+                        <TableSearch setSearch={setSearch} />
+                      </div>
+                    </div>
+                      {users.usersList.data &&
                         users.usersList.data.users &&
                         users.usersList.data.users &&
                         users.usersList.data.users.length > 0 ?
                         <>
- <Row>
-          <Col lg="12">
-            <Card>
-              <CardBody>
-                <>
-                  <Table
-                    responsive
-                    striped
-                    bordered
-                    hover
-                    size="md"
-                    className="fixed"
-                    style={{
-                      overflow: "hidden",
-                      tableLayout: "fixed",
-                      textAlign: "center",
-                    }}
-                  >
-                    <thead className="">
-                      <tr>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Age</th>
-                        <th>Phone Number</th>
-                        <th>Birthday</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
+                        
 
-                    <tbody>
-                      {users.usersList.data &&
-                        users.usersList.data.users &&
-                        users.usersList.data.users &&
-                        users.usersList.data.users.map((user, id) => (
-                          <tr>
-                            <td>{user.username}</td>
-                            {user.email && user.email.length > 17 ? (
-                              <td>{user.email.substring(0, 17)}....</td>
-                            ) : (
-                              <td>{user.email}</td>
-                            )}
-
-                            <td>{user.age}</td>
-                            <td>{user.phoneNumber}</td>
-                            <td>
-                              {moment(user.birthDate).format("MMM Do YYYY")}
-                            </td>
-                            <td>
-
-                              <span className="d-inline-block"
-                                id={`detail_${id}`}
-                                style={{ marginRight: "5px" }}
-                                onClick={() => {
-                                  edit(user.id);
-                                // history.push('/view-user-details')
-                                // dispatch(getUser(user.id));
-                                
-                                }}
-                                >  
-                                  <span className="text-secondary" >
-                                    <EyeIcon/>
-                                  </span>
-                              </span>
-
-
-                              <span className="d-inline-block" 
-                                  id={`Edit_${id}`}
-                                  style={{ marginRight: "5px" }}
-                                  onClick={() => {
-                                    history.push('/edit-user');
-                                    dispatch(
-                                      updateAction({
-                                        action: true,
-                                        id: user.id,
-                                      })
-                                    );
-                                  }}
-
-                                >  
-                                <span className="text-primary" >
-                                  <EditIcon/>
-                                </span>
-                                
-                              </span>  
-
-                              <span className="d-inline-block"
-                                id={`delete_${id}`}
-                                style={{ marginRight: "5px" }}
-                                onClick={() => {
-                                  setDeleteModal(true);
-                                  setUserId(user.id);
-                                }}
-                              >
-                                <span className="text-danger" >
-                                  <DeleteIcon/> 
-                                </span>
-                              </span>
-                              <span className="tooltip_top">
-                              <Tooltip id="tooltip_top"
-                                placement="top"
-                                isOpen={
-                                  tooltipOpenObj[`delete_${id}`] ? true : false
-                                }
-                                target={`delete_${id}`}
-                                toggle={() => toggleForToolObj1(`delete_${id}`)}
-                              >
-                                Delete User
-                              </Tooltip>
-                              <Tooltip id="tooltip_top_view"
-                                placement="top"
-                                isOpen={
-                                  tooltipOpenObj[`detail_${id}`] ? true : false
-                                }
-                                target={`detail_${id}`}
-                                toggle={() => toggleForToolObj1(`detail_${id}`)}
-                              >
-                                User Detail
-                              </Tooltip>
-                           
-                              <Tooltip id="tooltip_top_edit"
-                                placement="top"
-                                isOpen={
-                                  tooltipOpenObj[`Edit_${id}`] ? true : false
-                                }
-                                target={`Edit_${id}`}
-                                toggle={() => toggleForToolObj1(`Edit_${id}`)}
-                              >
-                                Edit User
-                              </Tooltip>
-                              </span>
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </Table>
-                  <Row className="justify-content-center mt-3">
-                    <Col lg="3">
-                      <div className="table_pagination">
-                        <Pagination
-                          itemClass="page-item"
-                          linkClass="page-link"
-                          activePage={users.userActivePage}
-                          itemsCountPerPage={8}
-                          totalItemsCount={
-                            users.usersList.totalPages
-                              ? users.usersList.totalPages * 8
-                              : 8
-                          }
-                          pageRangeDisplayed={5}
-                          onChange={(pageNumber) => {
-                            dispatch(changeUserActivePage(pageNumber));
+                        <Table
+                          responsive
+                          striped
+                          bordered
+                          hover
+                          size="md"
+                          className="fixed"
+                          style={{
+                            overflow: "hidden",
+                            tableLayout: "fixed",
+                            textAlign: "center",
                           }}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                </>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+                        >
+                          <thead className="">
+                            <tr>
+                              <th>Username</th>
+                              <th>Email</th>
+                              <th>Age</th>
+                              <th>Phone Number</th>
+                              <th>Birthday</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            {users.usersList.data &&
+                              users.usersList.data.users &&
+                              users.usersList.data.users &&
+                              users.usersList.data.users.map((user, id) => (
+                                <tr>
+                                  <td>{user.username}</td>
+                                  {user.email && user.email.length > 17 ? (
+                                    <td>{user.email.substring(0, 17)}....</td>
+                                  ) : (
+                                    <td>{user.email}</td>
+                                  )}
+
+                                  <td>{user.age}</td>
+                                  <td>{user.phoneNumber}</td>
+                                  <td>
+                                    {moment(user.birthDate).format("MMM Do YYYY")}
+                                  </td>
+                                  <td>
+
+                                    <span className="d-inline-block"
+                                      id={`detail_${id}`}
+                                      style={{ marginRight: "5px" }}
+                                      onClick={() => {
+                                        edit(user.id);
+                                        // history.push('/view-user-details')
+                                        // dispatch(getUser(user.id));
+
+                                      }}
+                                    >
+                                      <span className="text-secondary" >
+                                        <EyeIcon />
+                                      </span>
+                                    </span>
+
+
+                                    <span className="d-inline-block"
+                                      id={`Edit_${id}`}
+                                      style={{ marginRight: "5px" }}
+                                      onClick={() => {
+                                        history.push('/edit-user');
+                                        dispatch(
+                                          updateAction({
+                                            action: true,
+                                            id: user.id,
+                                          })
+                                        );
+                                      }}
+
+                                    >
+                                      <span className="text-primary" >
+                                        <EditIcon />
+                                      </span>
+
+                                    </span>
+
+                                    <span className="d-inline-block"
+                                      id={`delete_${id}`}
+                                      style={{ marginRight: "5px" }}
+                                      onClick={() => {
+                                        setDeleteModal(true);
+                                        setUserId(user.id);
+                                      }}
+                                    >
+                                      <span className="text-danger" >
+                                        <DeleteIcon />
+                                      </span>
+                                    </span>
+                                    <span className="tooltip_top">
+                                      <Tooltip id="tooltip_top"
+                                        placement="top"
+                                        isOpen={
+                                          tooltipOpenObj[`delete_${id}`] ? true : false
+                                        }
+                                        target={`delete_${id}`}
+                                        toggle={() => toggleForToolObj1(`delete_${id}`)}
+                                      >
+                                        Delete User
+                                </Tooltip>
+                                      <Tooltip id="tooltip_top_view"
+                                        placement="top"
+                                        isOpen={
+                                          tooltipOpenObj[`detail_${id}`] ? true : false
+                                        }
+                                        target={`detail_${id}`}
+                                        toggle={() => toggleForToolObj1(`detail_${id}`)}
+                                      >
+                                        User Detail
+                                </Tooltip>
+
+                                      <Tooltip id="tooltip_top_edit"
+                                        placement="top"
+                                        isOpen={
+                                          tooltipOpenObj[`Edit_${id}`] ? true : false
+                                        }
+                                        target={`Edit_${id}`}
+                                        toggle={() => toggleForToolObj1(`Edit_${id}`)}
+                                      >
+                                        Edit User
+                                </Tooltip>
+                                    </span>
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </Table>
+                      
+                        <Row className="justify-content-center mt-3">
+                          <Col lg="3">
+                            <div className="table_pagination">
+                              <Pagination
+                                itemClass="page-item"
+                                linkClass="page-link"
+                                activePage={users.userActivePage}
+                                itemsCountPerPage={8}
+                                totalItemsCount={
+                                  users.usersList.totalPages
+                                    ? users.usersList.totalPages * 8
+                                    : 8
+                                }
+                                pageRangeDisplayed={5}
+                                onChange={(pageNumber) => {
+                                  dispatch(changeUserActivePage(pageNumber));
+                                }}
+                              />
+                            </div>
+                          </Col>
+                        </Row>
                         </>
                         :
                         <>
-                          <Col lg="12">
-            <Card>
-              <CardBody>
-No Data Available
-              </CardBody>
-              </Card>
-              </Col>
+                        <Row>
+                          <Col lg="12"> 
+                            <h4 className="text-center mt-3">
+                              No Data Available 
+                            </h4>  
+                          </Col>
+                        </Row>
                         </>
-                        }
-       
+                      }
+                    </>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>  
       </Container>
     </React.Fragment>
   );

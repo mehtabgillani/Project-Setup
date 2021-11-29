@@ -812,6 +812,12 @@
   padding: 0;
   position: relative;
 }
+.listing_search{
+  .topbar__search-field {
+    margin-right: 0px !important;
+    margin-left: auto !important;
+  }
+}
 
 .topbar__search-field {
   width: 100%;

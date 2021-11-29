@@ -22,23 +22,33 @@ import {
   updateUser,
   setLoader
 } from "../../store/User/actions";
-
+import SelectOption from 'react-select'
 import EyeIcon from "mdi-react/EyeIcon";
 import moment from "moment";
 function AddUser() {
   const dispatch = useDispatch();
+  
   const dropdownOptions = useSelector(
     (state) => state.Users.registrationDropdownValues
-  );
+  );    
+  const userLookingFor= dropdownOptions.lookingFor && dropdownOptions.lookingFor.map((data,id)=>{
+    const dataValue = { 'value': data.id, 'label': data.name }; 
+    return  dataValue 
+  })       
+  const LookingForCustomStyles = {
+    control: base => ({
+      ...base,
+      // height: 32,
+      minHeight: 32
+    })
+  };
   const userDetail = useSelector((state) => state.Users.userDetail);
   const updateAction = useSelector((state) => state.Users.updateAction);
-  // const [loader, setLoader] = useState(false);
+  let lookingforParsedValue =[];
   const loader = useSelector((state) => state.Users.loader);
   useEffect(() => {
     dispatch(fetchRegistrationDropdown());
-    console.log("update action", updateAction);
     if (updateAction.action == true) {
-      console.log("i am in update action of it");
       dispatch(getUser(updateAction.id));
     } else if (updateAction.action == false) {
       dispatch(
@@ -50,16 +60,15 @@ function AddUser() {
             password: "",
             number: "",
             birthdate: "",
-            // location: "",
             height: "average",
             orientation: 1,
             gender: 10,
             relationship: 15,
             buildIs: 21,
             ethnicity: 27,
-            lookingFor: 2,
-            // photo: "",
-          },
+            // lookingFor: [userLookingFor[2],userLookingFor[1],userLookingFor[3]], 
+            lookingFor:userLookingFor[1],
+          },          
         })
       );
     }
@@ -107,8 +116,15 @@ function AddUser() {
     gender: Yup.string().required("Gender is required"),
     relationship: Yup.string().required("Relationship status is required"),
     buildIs: Yup.string().required("Build is required"),
-    ethnicity: Yup.string().required("Ethnicity is required"),
-    lookingFor: Yup.string().required("Looking to meet is required"),
+    // ethnicity: Yup.string().required("Ethnicity is required"),
+    lookingFor: Yup.array().required("Looking to meet is required"),
+    // lookingFor: Yup.array().of(
+    //   Yup.object().shape({
+    //     value: Yup.int().required("Looking to meet is required"),
+    //     label: Yup.string()
+    //       .required("Looking to meet is required") 
+    //   })
+    // )
     // photo: Yup.string().required("Photo is required"),
   });
 
@@ -117,7 +133,12 @@ function AddUser() {
     initialValues: userDetail,
     validationSchema: AddUserSchema,
     onSubmit: async (values) => {
-      console.log("values of add users form", values);
+      console.log("values of add users form", values.lookingFor);
+      values.lookingFor.map((parseValue)=>{
+        console.log("values in inner loop",parseValue.value)
+        lookingforParsedValue.push(parseValue.value)
+      })
+      console.log("data for bilal",lookingforParsedValue)
       dispatch(setLoader(true));
       if (updateAction.action == false) {
         await dispatch(
@@ -134,7 +155,7 @@ function AddUser() {
             relationship: values.relationship,
             buildIs: values.buildIs,
             ethnicity: values.ethnicity,
-            lookingFor: values.lookingFor,
+            lookingFor: lookingforParsedValue,
             // photo: values.photo,
           })
         );
@@ -154,7 +175,7 @@ function AddUser() {
             relationship: values.relationship,
             buildIs: values.buildIs,
             ethnicity: values.ethnicity,
-            lookingFor: values.lookingFor,
+            lookingFor: lookingforParsedValue,
             // photo: values.photo,
           })
         );
@@ -170,12 +191,6 @@ function AddUser() {
             <Col sm="6">
               <h4
                 className="page-title mb-3"
-                onClick={() => {
-                  console.log(
-                    "this is my user list which i had to show"
-                    // users.usersList
-                  );
-                }}
               >
                 {updateAction.action == false ? "Add User" : "Update User"}
               </h4>
@@ -197,7 +212,9 @@ function AddUser() {
                         <Row>
                           <Col lg="3">
                             <div className="form__form-group">
-                              <span className="form__form-group-label">
+                              <span className="form__form-group-label" onClick={()=>{
+                                console.log("vKUW U Qbr ro see",[userLookingFor[2],userLookingFor[1],userLookingFor[3]])
+                              }}>
                                 Username
                               </span>
                               <div className="form__form-group-field">
@@ -582,8 +599,19 @@ function AddUser() {
                               <span className="form__form-group-label">
                                 Who are you looking to meet?{" "}
                               </span>
+                              <SelectOption
+                                // defaultValue={[userLookingFor[2], userLookingFor[3]]}
+                                isMulti
+                                name="lookingFor"
+                                options={userLookingFor}
+                                value={addUserFormik.values.lookingFor}
+                                className="basic-multi-select"
+                                classNamePrefix="select"
+                                styles={LookingForCustomStyles}
+                                onChange={(userLookingFor) => addUserFormik.setFieldValue('lookingFor', userLookingFor)}
+                              /> 
                               <div className="form__form-group-field custom_select">
-                                <select
+                                {/* <select
                                   className="custom-select"
                                   name="lookingFor"
                                   value={addUserFormik.values.lookingFor}
@@ -602,7 +630,7 @@ function AddUser() {
                                         );
                                       }
                                     )}
-                                </select>
+                                </select> */}
                               </div>
                               {addUserFormik.touched.lookingFor &&
                               addUserFormik.errors.lookingFor ? (
@@ -641,7 +669,7 @@ function AddUser() {
                             <div className="form__form-group">
                               <div className="form__form-group form__form-group-field"></div>
                             </div>
-                            {loader == true ? (
+                            {loader == true && false ? (
                             <div className="d-flex justify-content-center account__btn" style={{height:'40px',paddingTop:'3px'}}>
                             <div className="spinner-border" role="status" style={{color:'whitesmoke'}}>
                               <span className="sr-only">Loading...</span>
@@ -654,10 +682,10 @@ function AddUser() {
                                     className="account__btn"
                                     type="submit"
                                     color="primary"
-                                    onClick={() => {
+                                    // onClick={() => {
                                     
-                                      addUserFormik.handleSubmit();
-                                    }}
+                                    //   addUserFormik.handleSubmit();
+                                    // }}
                                   >
                                     Create
                                   </Button>
@@ -666,10 +694,10 @@ function AddUser() {
                                     className="account__btn"
                                     type="submit"
                                     color="primary"
-                                    onClick={() => {
+                                    // onClick={() => {
                                     
-                                      addUserFormik.handleSubmit();
-                                    }}
+                                    //   addUserFormik.handleSubmit();
+                                    // }}
                                   >
                                     Update
                                   </Button>

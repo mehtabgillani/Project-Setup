@@ -24,13 +24,14 @@ import { sagaErrorHandler } from "../sagaErrorHandler";
 import { makeSelectAuthToken } from "../selectors";
 
 function* fetchUsers({ payload }) {
+  console.log("Payload", payload.search);
   try {
     const token = yield select(makeSelectAuthToken());
     const headers = { headers: { Authorization: `Bearer ${token}` } };
     const response = yield axios.get(
-      `/admin/users?page=${payload.page}`,
+      `/admin/users?page=${payload.page}&keyword=${payload.search}`,
       headers
-    );
+    ); 
     if (response.data.data.users.length == 0) {
       if(response.data.totalPages == 0)
       {
@@ -59,7 +60,8 @@ function* deleteUser({ payload }) {
 }
 function* addUser({ payload }) {
   try {
-   console.log("payload of add user",payload.photo)
+   console.log("payload ",payload)
+   console.log("payload of add user",payload.lookingFor)
     const token = yield select(makeSelectAuthToken());
     let data = {
       email: payload.email,
@@ -74,7 +76,7 @@ function* addUser({ payload }) {
       relationshipStatus: payload.relationship,
       build: payload.buildIs,
       ethnicity: payload.ethnicity,
-      lookingToMeets: [payload.lookingFor],
+      lookingToMeets: payload.lookingFor,
       // photos: [payload.photo],
     };
     const response = yield axios.post(`/admin/users`, data, {
@@ -110,7 +112,7 @@ function* editUser({ payload }) {
       relationshipStatus: payload.relationship,
       build: payload.buildIs,
       ethnicity: payload.ethnicity,
-      lookingToMeets: [payload.lookingFor],
+      lookingToMeets: payload.lookingFor,
       // "photo": payload.photo,
     };
     const response = yield axios.patch(
@@ -140,13 +142,24 @@ function* fetchDropdownOptions({ payload }) {
 
 function* fetchGetUser({ payload }) {
   try {
-    console.log("i am in fetch get user api")
     const token = yield select(makeSelectAuthToken());
     const headers = { headers: { Authorization: `Bearer ${token}` } };
     const response = yield axios.get(`/admin/users/${payload}`, headers);
     const userDetail = response.data.data.user;
-    console.log(" response.data.data.user", response.data.data.user)
+    console.log(" final values of get user", response.data.data.user.LookingToMeets)
     
+    // let lookingforParsedValue =[];
+    // userDetail.LookingToMeets.map((parseValue)=>{
+    //   console.log("values in inner loop",parseValue.value)
+    //   lookingforParsedValue.push(parseValue.value)
+    // })
+    // console.log("data for bilal",lookingforParsedValue) 
+
+    const userLookingFor= userDetail.LookingToMeets && userDetail.LookingToMeets.map((data,id)=>{
+      const dataValue = { 'value': data.id, 'label': data.name }; 
+      return  dataValue 
+    })    
+
     let data = {
       status: "success",
       data: {
@@ -163,10 +176,8 @@ function* fetchGetUser({ payload }) {
         relationship: userDetail.relationship_status.id? userDetail.relationship_status.id: 15,
         buildIs: userDetail.body_build.id ? userDetail.body_build.id : 21,
         ethnicity: userDetail.ethni.id ? userDetail.ethni.id : 27,
-        lookingFor:  userDetail.LookingToMeets[0] && userDetail.LookingToMeets[0].id? userDetail.LookingToMeets[0].id: 2},
+        lookingFor:  userLookingFor? userLookingFor: 2},
     };
-    console.log("data that we are going to put in reducer",data)
-
     yield put(getUserSuccess(data));
     yield put(getUserDetailSuccess(userDetail));
   } catch (error) {
