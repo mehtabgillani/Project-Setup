@@ -9,6 +9,7 @@ import authReducer from './authReducer';
 // import auth from './testReducer/reducer';
 import auth from '../../store/Auth/reducer'
 import Users from "../../store/User/reducer"
+import Subusers from "../../store/Subuser/reducer" 
 
 export {
   themeReducer,
@@ -20,5 +21,6 @@ export {
   todoReducer,
   authReducer,
   auth,
-  Users
+  Users,
+  Subusers
 };

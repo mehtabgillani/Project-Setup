@@ -28,6 +28,12 @@ const SidebarContent = ({
           icon="user"
           onClick={hideSidebar}
         />
+        <SidebarLink
+         title="Subusers"
+         route="/subusers"
+         icon="users"
+         onClick={hideSidebar}
+       />
 {/*         
         <SidebarLink
           title="Online Marketing Dashboard"

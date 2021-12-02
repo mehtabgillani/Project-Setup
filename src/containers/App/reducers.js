@@ -11,7 +11,8 @@ import {
   sidebarReducer,
   authReducer,
   auth,
-  Users
+  Users,
+  Subusers
 } from "../../redux/reducers/index";
 import appConfigReducer from "../../redux/reducers/appConfigReducer";
 import covidReducer from "../Maps/VectorMapWithRequestData/redux/covidReducer";
@@ -33,5 +34,6 @@ const rootReducer = combineReducers({
   todo: todoReducer,
   auth: auth,
   Users:Users,
+  Subusers:Subusers,
 });
 export default rootReducer;

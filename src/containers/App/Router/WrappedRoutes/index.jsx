@@ -22,6 +22,8 @@ import Finance from './ThemeRoutes/Finance';
 import User from "./AppRoutes/User"
 import AddUser from "./AppRoutes/AddUser"
 import ViewUser from "./AppRoutes/ViewUser"
+import AddSubUser from "./AppRoutes/AddSubUser"
+import SubUsers from "./AppRoutes/SubUser"
 
 export default () => (
   <div>
@@ -50,6 +52,8 @@ export default () => (
       <Route path="/add-user" component={AddUser} />
       <Route path="/edit-user" component={AddUser} />
       <Route path="/view-user-details/:id" component={ViewUser} />
+      <Route path="/add-subuser" component={AddSubUser} />
+      <Route path="/subusers" component={SubUsers} />
     </div>
   </div>
 );

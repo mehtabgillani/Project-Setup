@@ -24,7 +24,7 @@ import { sagaErrorHandler } from "../sagaErrorHandler";
 import { makeSelectAuthToken } from "../selectors";
 
 function* fetchUsers({ payload }) {
-  console.log("Payload", payload.search);
+  console.log("Users", payload.search);
   try {
     const token = yield select(makeSelectAuthToken());
     const headers = { headers: { Authorization: `Bearer ${token}` } };
