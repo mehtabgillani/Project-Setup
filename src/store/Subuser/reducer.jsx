@@ -1,7 +1,9 @@
 import produce from "immer";
 import {
   GET_SUBUSERS_LIST_SUCCESS,
-  SET_LOADER
+  SET_LOADER,
+  SUBUSER_UPDATE_ACTION,
+  GET_SUBUSER_SUCCESS
 } from "./constant";
  
 const initialState = {
@@ -13,9 +15,13 @@ const initialState = {
     password: "",
     number: "",
     birthdate: "", 
-    // photo: "",
+    photo: "",
   }, 
   loader:false,
+  subuserUpdateAction:{
+    action:false,
+    id:'',
+  } ,
 };
 
 const Subusers = produce((state, action) => {
@@ -25,6 +31,12 @@ const Subusers = produce((state, action) => {
       break; 
     case SET_LOADER:
       state.loader =action.payload;
+      break;
+    case SUBUSER_UPDATE_ACTION:
+      state.subuserUpdateAction =action.payload;
+      break;
+    case GET_SUBUSER_SUCCESS:
+      state.userDetail =action.payload.data;
       break;
     default:
   }

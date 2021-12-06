@@ -96,6 +96,7 @@ function* addUser({ payload }) {
 }
 
 function* editUser({ payload }) {
+  console.log("pay", payload)
   try {
     const token = yield select(makeSelectAuthToken());
     const headers = { headers: { Authorization: `Bearer ${token}` } };

@@ -16,9 +16,9 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addNewSubuser, 
-  // getUser,
-  // getUserSuccess,
-  // updateUser,
+  getSubUser,
+  getSubUserSuccess,
+  updateSubUser,
   setLoader
 } from "../../store/Subuser/actions"; 
 import moment from "moment";
@@ -26,26 +26,27 @@ function AddSubUser() {
   const dispatch = useDispatch();
    
   const userDetail = useSelector((state) => state.Subusers.userDetail); 
-  const updateAction = useSelector((state) => state.Users.updateAction); 
+  const updateAction = useSelector((state) => state.Subusers.subuserUpdateAction); 
+  console.log("updateAction", updateAction.id)
   const loader = useSelector((state) => state.Subusers.loader);
   useEffect(() => { 
     if (updateAction.action == true) {
-      // dispatch(
-      //   getUser(updateAction.id)
-      //   );
+      dispatch(
+        getSubUser(updateAction.id)
+        );
     } else if (updateAction.action == false) {
-      // dispatch(
-      //   getUserSuccess({
-      //     status: "success",
-      //     data: {
-      //       name: "",
-      //       email: "",
-      //       password: "",
-      //       number: "",
-      //       birthdate: ""
-      //     },          
-      //   })
-      // );
+      dispatch(
+        getSubUserSuccess({
+          status: "success",
+          data: {
+            name: "",
+            email: "",
+            password: "",
+            number: "",
+            birthdate: ""
+          },          
+        })
+      );
     }
   }, []);
   const [showPassword, setShowPassword] = useState("password");
@@ -85,14 +86,14 @@ function AddSubUser() {
       .min(10, "Phone number can not be less than 10 digits")
       .max(17, "Phone number can not be more than 17 digits"),
     birthdate: Yup.string().required("Birthday is required"), 
+    photo: Yup.string().required("Photo is required"),
   });
 
   const addSubUserFormik = useFormik({
     enableReinitialize: true,
     initialValues: userDetail,
     validationSchema: AddSubUserSchema,
-    onSubmit: async (values) => {
-       console.log("Add subuser", values);
+    onSubmit: async (values) => { 
       dispatch(setLoader(true));
       if (updateAction.action == false) {
         await dispatch(
@@ -105,17 +106,18 @@ function AddSubUser() {
             photo: values.photo,
           })
         );
-      } else if (updateAction.action == true) {
-        // await dispatch(
-        //   updateUser({
-        //     id: updateAction.id,
-        //     name: values.name,
-        //     email: values.email,
-        //     password: values.password,
-        //     number: values.number,
-        //     birthdate: values.birthdate, 
-        //   })
-        // );
+      } else if (updateAction.action == true) { 
+        await dispatch(
+          updateSubUser({
+            id: updateAction.id,
+            name: values.name,
+            email: values.email,
+            password: values.password,
+            number: values.number,
+            birthdate: values.birthdate,   
+            photo: values.photo,
+          })
+        );
       }
     },
   });
@@ -129,7 +131,7 @@ function AddSubUser() {
               <h4
                 className="page-title mb-3"
               >
-                {updateAction.action == false ? "Add Subuser" : "Update User"}
+                {updateAction.action == false ? "Add Subuser" : "Update Subuser"}
               </h4>
             </Col>
           </Row>

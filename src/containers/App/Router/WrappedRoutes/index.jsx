@@ -53,6 +53,7 @@ export default () => (
       <Route path="/edit-user" component={AddUser} />
       <Route path="/view-user-details/:id" component={ViewUser} />
       <Route path="/add-subuser" component={AddSubUser} />
+      <Route path="/edit-subuser" component={AddSubUser} />
       <Route path="/subusers" component={SubUsers} />
     </div>
   </div>

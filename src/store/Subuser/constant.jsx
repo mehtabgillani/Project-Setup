@@ -3,3 +3,7 @@ export const GET_SUBUSERS_LIST = 'get_subusers_list';
 export const ADD_SUBUSER = 'add_subusers';
 export const SET_LOADER='set_loader' 
 export const DELETE_SUBUSER = 'delete_subuser';
+export const SUBUSER_UPDATE_ACTION = 'subuser_update_action';
+export const GET_SUBUSER = 'get_subuser'; 
+export const GET_SUBUSER_SUCCESS = 'get_subuser_success';  
+export const EDIT_SUBUSER = 'edit_subuser'; 

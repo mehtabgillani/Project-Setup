@@ -13,7 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Pagination from "react-js-pagination";
 import {
   getSubUsersList,
-  deleteSubUser
+  deleteSubUser,
+  subuserUpdateAction
 } from "../../store/Subuser/actions";
 import Delete from "../../assets/icons/delete.svg";
 import EditIcon from 'mdi-react/EditIcon';
@@ -28,7 +29,8 @@ import { useHistory } from "react-router-dom";
 
 function SubUsersList() {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.Subusers);
+  const users = useSelector((state) => state.Subusers); 
+  // console.log("users", users.usersList.data.users)
   const [tooltipOpenObj, setTooltipOpenObj] = useState({});
   const [deleteModal, setDeleteModal] = useState(false);
   const [search, setSearch] = useState("");
@@ -72,7 +74,12 @@ function SubUsersList() {
                 color="primary"
                 onClick={() => {
                   routeChange();
-
+                  dispatch(
+                    subuserUpdateAction({
+                      action: false,
+                      id: "",
+                    })
+                  );
                 }}
               >
                 Add Subuser
@@ -114,7 +121,7 @@ function SubUsersList() {
                           bordered
                           hover
                           size="md"
-                          className="fixed"
+                          className="fixed subuser_table"
                           style={{
                             overflow: "hidden",
                             tableLayout: "fixed",
@@ -123,6 +130,7 @@ function SubUsersList() {
                         >
                           <thead className="">
                             <tr>
+                              <th>Photo</th>
                               <th>Username</th>
                               <th>Email</th>
                               <th>Phone Number</th>
@@ -137,7 +145,17 @@ function SubUsersList() {
                               users.usersList.data.users &&
                               users.usersList.data.users.map((user, id) => (
                                 <tr>
-                                  <td>{user.username}</td>
+                                  <td> 
+                                  <img
+                                    className="img-responsive"
+                                    src={user.UserPhotos.length > 0 && user.UserPhotos[0].url ? user.UserPhotos[0].url : ''}
+                                    alt="avatar" 
+                                    style={{width: "40px"}}
+                                  />
+                                    {}</td>
+                                  <td onClick={()=>{
+                                    console.log("heyyyyyyy",user.UserPhotos[0].url)
+                                  }}>{user.username}</td>
                                   {user.email && user.email.length > 17 ? (
                                     <td>{user.email.substring(0, 17)}....</td>
                                   ) : (
@@ -150,22 +168,27 @@ function SubUsersList() {
                                   </td>
                                   <td>
 
-                                    <span className="d-inline-block"
+                                    {/* <span className="d-inline-block"
                                       id={`detail_${id}`}
                                       style={{ marginRight: "5px" }} 
                                     >
                                       <span className="text-secondary" >
                                         <EyeIcon />
                                       </span>
-                                    </span>
+                                    </span> */}
 
 
                                     <span className="d-inline-block"
                                       id={`Edit_${id}`}
-                                      style={{ marginRight: "5px" }}
+                                      style={{ marginRight: "5px" }} 
                                       onClick={() => {
-                                        history.push('/edit-user');
-                                        
+                                        history.push('/edit-subuser');
+                                        dispatch(
+                                          subuserUpdateAction({
+                                            action: true,
+                                            id: user.id,
+                                          })
+                                        );
                                       }}
 
                                     >
@@ -198,7 +221,7 @@ function SubUsersList() {
                                       >
                                         Delete User
                                 </Tooltip>
-                                      <Tooltip id="tooltip_top_view"
+                                      {/* <Tooltip id="tooltip_top_view"
                                         placement="top"
                                         isOpen={
                                           tooltipOpenObj[`detail_${id}`] ? true : false
@@ -207,7 +230,7 @@ function SubUsersList() {
                                         toggle={() => toggleForToolObj1(`detail_${id}`)}
                                       >
                                         User Detail
-                                </Tooltip>
+                                </Tooltip> */}
 
                                       <Tooltip id="tooltip_top_edit"
                                         placement="top"
