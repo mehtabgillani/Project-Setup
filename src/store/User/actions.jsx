@@ -11,6 +11,8 @@ import {
   GET_USER_SUCCESS,
   UPDATE_ACTION,
   GET_USER_DETAIL_SUCCESS,
+  DELETE_OPTION,
+  ADD_OPTION,
   SET_LOADER
 } from "./constant";
 
@@ -67,13 +69,26 @@ export const deleteUser = (data) => {
   };
 };
 
+export const deleteOption = (data) => {
+  return {
+    type: DELETE_OPTION,
+    payload: data,
+  };
+};
+
 export const addNewUser = (data) => {
   return {
       type: ADD_USER,
       payload: data
   };
 };
-
+export const addNewOption = (data) => {
+  console.log(data)
+  return {
+      type: ADD_OPTION,
+      payload: data
+  };
+};
 export const updateUser = (data) => {
   return {
       type: EDIT_USER,

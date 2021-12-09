@@ -86,7 +86,11 @@ function AddSubUser() {
       .min(10, "Phone number can not be less than 10 digits")
       .max(17, "Phone number can not be more than 17 digits"),
     birthdate: Yup.string().required("Birthday is required"), 
-    photo: Yup.string().required("Photo is required"),
+    photo: Yup.mixed().when(["isUpdate"], {
+      is: true,
+      then: Yup.mixed(),
+      otherwise: Yup.mixed().required("Photo is required"),
+    }),
   });
 
   const addSubUserFormik = useFormik({
@@ -94,6 +98,7 @@ function AddSubUser() {
     initialValues: userDetail,
     validationSchema: AddSubUserSchema,
     onSubmit: async (values) => { 
+      console.log("values of formik",values)
       dispatch(setLoader(true));
       if (updateAction.action == false) {
         await dispatch(
@@ -331,8 +336,8 @@ function AddSubUser() {
                             </div>
                           </Col> 
                           <Col lg="3">
-                            <FormGroup>
-                              <Label for="ad">Add photo</Label>
+                          
+                              <Label for="ad" onClick={()=>{console.log("hey",addSubUserFormik.errors.photo)}}>Add photo</Label>
                               <Input
                                 name="photo" 
                                 label="Add photo"
@@ -346,13 +351,16 @@ function AddSubUser() {
                                 // multiple="multiple"
                                 accept="image/*"
                               />
-                              {addSubUserFormik.touched.photo && addSubUserFormik.errors.photo ? (
-                                <div className="text-start mb-1 text-danger">
-                                  {addSubUserFormik.errors.photo}
-                                </div>
-                              ) : null}
-                            </FormGroup>
+                            {
+                                addSubUserFormik.errors.photo ? (
+                                  <div className="text-start mb-1 text-danger">
+                                    {addSubUserFormik.errors.photo}
+                                  </div>
+                                ) : null}
+                          
+                           
                           </Col>
+                         
                         </Row>
                         <Row>
                           <Col lg="3">

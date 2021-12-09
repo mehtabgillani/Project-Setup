@@ -34,6 +34,12 @@ const SidebarContent = ({
          icon="users"
          onClick={hideSidebar}
        />
+       <SidebarLink
+        title="Add Select Options"
+        icon="file-add"
+        route="/dynamic-options"
+        onClick={hideSidebar}
+      />
 {/*         
         <SidebarLink
           title="Online Marketing Dashboard"
@@ -185,7 +191,7 @@ const SidebarContent = ({
           title="Forms"
           icon="file-add"
           sidebarCollapse={sidebarCollapse}
-        >
+        > 
           <SidebarLink
             title="Basic Form"
             route="/forms/basic_form"

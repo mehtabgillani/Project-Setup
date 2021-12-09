@@ -24,6 +24,7 @@ import AddUser from "./AppRoutes/AddUser"
 import ViewUser from "./AppRoutes/ViewUser"
 import AddSubUser from "./AppRoutes/AddSubUser"
 import SubUsers from "./AppRoutes/SubUser"
+import DynamicOptions from "./AppRoutes/DynamicOptions"
 
 export default () => (
   <div>
@@ -55,6 +56,7 @@ export default () => (
       <Route path="/add-subuser" component={AddSubUser} />
       <Route path="/edit-subuser" component={AddSubUser} />
       <Route path="/subusers" component={SubUsers} />
+      <Route path="/dynamic-options" component={DynamicOptions} />
     </div>
   </div>
 );

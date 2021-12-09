@@ -8,14 +8,18 @@ import {
   REGISTRATION_FORM_DROPDOWNS,
   GET_USER,
   EDIT_USER,
+  DELETE_OPTION,
+  ADD_OPTION
 } from "./constant";
 import {
   getUsersListSuccess,
   getUsersList,
   changeUserActivePage,
   fetchRegistrationDropdownSuccess,
+  fetchRegistrationDropdown,
   getUserSuccess,
   getUserDetailSuccess,
+  addNewOption,
   setLoader
 } from "./actions";
 import { toast } from "react-toastify";
@@ -54,6 +58,17 @@ function* deleteUser({ payload }) {
     const response = yield axios.delete(`/admin/users/${payload.id}`, headers);
     toast.success(response.data.message);
     yield put(getUsersList({ page: payload.page }));
+  } catch (error) {
+    yield sagaErrorHandler(error.response);
+  }
+}
+function* deleteOption({ payload }) {
+  try {
+    const token = yield select(makeSelectAuthToken());
+    const headers = { headers: { Authorization: `Bearer ${token}` } };
+    const response = yield axios.delete(`/admin/dropdowns/${payload.id}`, headers);
+    toast.success(response.data.message); 
+    yield put(fetchRegistrationDropdown());
   } catch (error) {
     yield sagaErrorHandler(error.response);
   }
@@ -134,7 +149,7 @@ function* fetchDropdownOptions({ payload }) {
   try {
     const token = yield select(makeSelectAuthToken());
     const headers = { headers: { Authorization: `Bearer ${token}` } };
-    const response = yield axios.get(`/profile/dropdown-data`, headers);
+    const response = yield axios.get(`/profile/dropdown-data`, headers); 
     yield put(fetchRegistrationDropdownSuccess(response.data.data));
   } catch (error) {
     yield sagaErrorHandler(error.response);
@@ -185,11 +200,65 @@ function* fetchGetUser({ payload }) {
     yield sagaErrorHandler(error.response);
   }
 }
-
+function* addOption({ payload }) {
+  try { 
+    const token = yield select(makeSelectAuthToken());
+    let data = {}
+    if (payload.orientationoption) { 
+      data = {  
+        option:payload.orientationoption,
+        value:payload.orientation 
+      }; 
+    } else if (payload.gender) { 
+      data = {  
+        option:payload.genderoption,
+        value:payload.gender 
+      };   
+    } else if (payload.gender) { 
+      data = {  
+        option:payload.relationshipoption,
+        value:payload.relationship 
+      };  
+    } else if (payload.buildIs) { 
+      data = {  
+        option:payload.buildisoption,
+        value:payload.buildIs 
+      };  
+    } else if (payload.ethnicity) { 
+      data = {  
+        option:payload.ethnicityoption,
+        value:payload.ethnicity 
+      };  
+    } else if (payload.lookingFor) { 
+      data = {  
+        option:payload.lookingForoption,
+        value:payload.lookingFor 
+      };  
+    } else if (payload.interests) { 
+      data = {  
+        option:payload.interestsoption,
+        value:payload.interests 
+      };  
+    }
+    
+    const response = yield axios.post(`/admin/dropdowns`, data, {
+      headers: { 
+        "X-Requested-With": "XMLHttpRequest",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    yield put(setLoader(false));
+    toast.success("Option added successfully"); 
+    yield put(fetchRegistrationDropdown());
+    
+  } catch (error) {
+    yield sagaErrorHandler(error.response);
+    yield put(setLoader(false));
+  }
+}
 export function* watchFetchUsers() {
   yield takeLatest(GET_USERS_LIST, fetchUsers);
-}
-
+} 
 export function* watchDeleteUser() {
   yield takeLatest(DELETE_USER, deleteUser);
 }
@@ -206,7 +275,12 @@ export function* watchFetchDropdown() {
 export function* watchFetchGetUser() {
   yield takeLatest(GET_USER, fetchGetUser);
 }
-
+export function* watchDeleteOption() {
+  yield takeLatest(DELETE_OPTION, deleteOption);
+}
+export function* watchAddOption() {
+  yield takeLatest(ADD_OPTION, addOption);
+}
 export default function* UserSaga() {
   yield all([
     fork(watchFetchUsers),
@@ -215,5 +289,7 @@ export default function* UserSaga() {
     fork(watchEditUser),
     fork(watchFetchDropdown),
     fork(watchFetchGetUser),
+    fork(watchDeleteOption),
+    fork(watchAddOption),
   ]);
 }

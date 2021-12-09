@@ -4,8 +4,8 @@ import MainWrapper from '../MainWrapper';
 import LogIn from '../../../containers/Account/LogIn/index';
 import WrappedRoutes from './WrappedRoutes';
 import PublicRoute from '../../../Auth/publicRoute'
-import PrivateRoute from '../../../Auth/privateRoute'
-// import ResetPassword from '../../ResetPassword/index'
+import PrivateRoute from '../../../Auth/privateRoute' 
+import ResetPassword from '../../Account/ResetPassword/index'
 // import NotFound404 from '../../404/NotFound404'
 
 const Router = () => {
@@ -14,8 +14,8 @@ const Router = () => {
     <MainWrapper>
       <main>
         <Switch>
-          {/* <PublicRoute restricted={false} component={ResetPassword} path="/reset_password/:user_id?/:forgotToken?/" />
-          <PublicRoute restricted={false} path='/404' component={NotFound404} /> */}
+          <PublicRoute restricted={false} component={ResetPassword} path="/reset_password/:user_id?/:forgotToken?/" />
+          {/* <PublicRoute restricted={false} path='/404' component={NotFound404} /> */}
           <PublicRoute restricted={true} component={LogIn} path="/" exact />
           <PrivateRoute path="/" component={WrappedRoutes} />
         </Switch>

@@ -26,6 +26,30 @@ import SelectOption from 'react-select'
 import EyeIcon from "mdi-react/EyeIcon";
 import moment from "moment";
 function AddUser() {
+  const LookingForCustomStyles = {
+    control: base => ({
+        ...base,
+        minHeight: 30,
+        borderRadius: '0',
+    }),
+    dropdownIndicator: base => ({
+        ...base,
+        padding: 4
+    }),
+    clearIndicator: base => ({
+        ...base,
+        padding: 4
+    }), 
+    valueContainer: base => ({
+        ...base,
+        padding: '0px 6px'
+    }),
+    input: base => ({
+        ...base,
+        margin: 0,
+        padding: 0
+    })
+};
   const dispatch = useDispatch();
   
   const dropdownOptions = useSelector(
@@ -35,13 +59,14 @@ function AddUser() {
     const dataValue = { 'value': data.id, 'label': data.name }; 
     return  dataValue 
   })       
-  const LookingForCustomStyles = {
-    control: base => ({
-      ...base,
-      // height: 32,
-      minHeight: 32
-    })
-  };
+  // const  = {
+  //   control: base => ({
+  //     ...base,
+  //     border: '1',
+  //     // This line disable the blue border
+  //     boxShadow: 'none'
+  //   })
+  // };
   const userDetail = useSelector((state) => state.Users.userDetail);
   const updateAction = useSelector((state) => state.Users.updateAction);
   let lookingforParsedValue =[];
@@ -199,7 +224,7 @@ function AddUser() {
         </div>
 
         <Row>
-          <Col lg="12">
+          <Col lg="12" className="input_form_settings">
             <Card>
               <CardBody>
                 <>
@@ -210,7 +235,7 @@ function AddUser() {
                         onSubmit={addUserFormik.handleSubmit}
                       >
                         <Row>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label" onClick={()=>{
                                 console.log("vKUW U Qbr ro see",[userLookingFor[2],userLookingFor[1],userLookingFor[3]])
@@ -237,7 +262,7 @@ function AddUser() {
                             </div>
                           </Col>
                           {updateAction.action ? (
-                            <Col lg="3">
+                            <Col lg="4">
                               <div className="form__form-group">
                                 <span className="form__form-group-label">
                                   Email{" "}
@@ -263,7 +288,7 @@ function AddUser() {
                               </div>
                             </Col>
                           ) : (
-                            <Col lg="3">
+                            <Col lg="4">
                               <div className="form__form-group">
                                 <span className="form__form-group-label">
                                   Email{" "}
@@ -289,7 +314,7 @@ function AddUser() {
                             </Col>
                           )}
                           {updateAction.action ? (
-                            // <Col lg="3">
+                            // <Col lg="4">
                             //   <div className="form__form-group">
                             //     <span className="form__form-group-label">
                             //       Password
@@ -317,7 +342,7 @@ function AddUser() {
                             <>
                             </>
                           ) : (
-                            <Col lg="3">
+                            <Col lg="4">
                               <div className="form__form-group">
                                 <span className="form__form-group-label">
                                   Password
@@ -343,7 +368,7 @@ function AddUser() {
                             </Col>
                           )}
 
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 {" "}
@@ -368,7 +393,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 When is your birthday?
@@ -393,7 +418,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          {/* <Col lg="3">
+                          {/* <Col lg="4">
                           <div className="form__form-group">
                             <span className="form__form-group-label">Where are you located?</span>
                             <div className="form__form-group-field"> 
@@ -414,7 +439,7 @@ function AddUser() {
                             ) : null}
                           </div>
                         </Col>  */}
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 How tall are you?
@@ -440,7 +465,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 What is your sexual orientation?
@@ -472,7 +497,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 What is your gender?
@@ -502,7 +527,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 What is your relationship status?
@@ -534,7 +559,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 What would you say your build is?
@@ -564,7 +589,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 What is your ethnicity?
@@ -594,7 +619,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <span className="form__form-group-label">
                                 Who are you looking to meet?{" "}
@@ -602,10 +627,10 @@ function AddUser() {
                               <SelectOption
                                 // defaultValue={[userLookingFor[2], userLookingFor[3]]}
                                 isMulti
-                                name="lookingFor"
+                                name="lookingFor" 
                                 options={userLookingFor}
                                 value={addUserFormik.values.lookingFor}
-                                className="basic-multi-select"
+                                className="basic-multi-select user_multiselect"
                                 classNamePrefix="select"
                                 styles={LookingForCustomStyles}
                                 onChange={(userLookingFor) => addUserFormik.setFieldValue('lookingFor', userLookingFor)}
@@ -640,7 +665,7 @@ function AddUser() {
                               ) : null}
                             </div>
                           </Col>
-                          {/* <Col lg="3">
+                          {/* <Col lg="4">
                         <FormGroup>
                             <Label for="ad">Add photo</Label>
                             <Input
@@ -665,7 +690,7 @@ function AddUser() {
                         </Col> */}
                         </Row>
                         <Row>
-                          <Col lg="3">
+                          <Col lg="4">
                             <div className="form__form-group">
                               <div className="form__form-group form__form-group-field"></div>
                             </div>
